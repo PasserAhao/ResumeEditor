@@ -1,24 +1,6 @@
-# resume
+# resume是一个纯前端开发的简历生成项目
+## 如何使用？
+直接拉取代码在本地后直接执行 npm install安装所有依赖就可以直接运行。
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+项目会持续更新更多的简历模板
