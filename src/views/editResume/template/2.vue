@@ -317,7 +317,7 @@
 
               <div>
                 <span style="font-size: 14px;color: #606266">年龄&nbsp;:&nbsp;&nbsp;</span>
-                <el-date-picker style="width: 150px" v-model="userinfo.date"
+                <el-date-picker style="width: 150px" v-model="userinfo.date" @change="DateChange"
                                 type="date" placeholder="出生日期" value-format="YYYY-MM-DD"/>
                 <el-checkbox v-model="isShowD.date" style="margin-left: 15px" label="转数字" name="type"
                              @change="NumToDate"/>
@@ -347,25 +347,25 @@
               <h3>求职意向</h3>
 
               <el-form-item label="求职意向:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[0].content" style="width: 200px;"></el-input>
+                <el-input v-model="userinfo.jobIntention[0].content" style="width: 200px;"@change="workChange1"/>
                 <el-checkbox v-model="userinfo.jobIntention[0].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle1"/>
               </el-form-item>
 
               <el-form-item label="意向城市:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[1].content" style="width: 200px;"></el-input>
+                <el-input v-model="userinfo.jobIntention[1].content" style="width: 200px;"@change="workChange2"/>
                 <el-checkbox v-model="userinfo.jobIntention[1].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle2"/>
               </el-form-item>
 
               <el-form-item label="期望薪资:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[2].content" style="width: 200px;"></el-input>
+                <el-input v-model="userinfo.jobIntention[2].content" style="width: 200px;"@change="workChange3"/>
                 <el-checkbox v-model="userinfo.jobIntention[2].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle3"/>
               </el-form-item>
 
               <el-form-item label="入职时间:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[3].content" style="width: 200px;"></el-input>
+                <el-input v-model="userinfo.jobIntention[3].content" style="width: 200px;"@change="workChange4"/>
                 <el-checkbox v-model="userinfo.jobIntention[3].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle4"/>
               </el-form-item>
@@ -936,6 +936,13 @@ export default defineComponent({
         {value: '20年以上工作经验', label: '20年以上工作经验',},
         {value: '30年以上工作经验', label: '30年以上工作经验',},
       ])
+      const DateChange = (value)=>{
+        if (isShowD.date){
+          NumToDate(value)
+        }else {
+          userinfo.age = value
+        }
+      }
       const NumToDate = (value) => {
         const aaa = userinfo.age
         const date = new Date(userinfo.date)
@@ -973,11 +980,24 @@ export default defineComponent({
       const jobIntentionHandle4 = (value) => {
         jobHandle(value, 3, "到岗时间")
       }
+      const workChange1 = (value)=>{
+        userinfo.job[0].content = value
+      }
+      const workChange2 = (value)=>{
+        userinfo.job[1].content = value
+      }
+      const workChange3 = (value)=>{
+        userinfo.job[2].content = value
+      }
+      const workChange4 = (value)=>{
+        userinfo.job[3].content = value
+      }
       return {
         userinfo, workerAge, isShowD,
-        NumToDate,
+        NumToDate,DateChange,
         isShowAddressHandle,
-        jobIntentionHandle1, jobIntentionHandle2, jobIntentionHandle3, jobIntentionHandle4
+        jobIntentionHandle1, jobIntentionHandle2, jobIntentionHandle3, jobIntentionHandle4,
+        workChange1,workChange2,workChange3,workChange4,
       }
     }
     // 技能特长
