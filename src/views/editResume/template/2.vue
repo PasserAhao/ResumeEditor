@@ -347,25 +347,25 @@
               <h3>求职意向</h3>
 
               <el-form-item label="求职意向:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[0].content" style="width: 200px;"@change="workChange1"/>
+                <el-input v-model="userinfo.jobIntention[0].content" style="width: 200px;" @change="workChange1"/>
                 <el-checkbox v-model="userinfo.jobIntention[0].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle1"/>
               </el-form-item>
 
               <el-form-item label="意向城市:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[1].content" style="width: 200px;"@change="workChange2"/>
+                <el-input v-model="userinfo.jobIntention[1].content" style="width: 200px;" @change="workChange2"/>
                 <el-checkbox v-model="userinfo.jobIntention[1].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle2"/>
               </el-form-item>
 
               <el-form-item label="期望薪资:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[2].content" style="width: 200px;"@change="workChange3"/>
+                <el-input v-model="userinfo.jobIntention[2].content" style="width: 200px;" @change="workChange3"/>
                 <el-checkbox v-model="userinfo.jobIntention[2].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle3"/>
               </el-form-item>
 
               <el-form-item label="入职时间:" style="margin-top: 15px">
-                <el-input v-model="userinfo.jobIntention[3].content" style="width: 200px;"@change="workChange4"/>
+                <el-input v-model="userinfo.jobIntention[3].content" style="width: 200px;" @change="workChange4"/>
                 <el-checkbox v-model="userinfo.jobIntention[3].isShow" style="margin-left: 15px" name="type"
                              @change="jobIntentionHandle4"/>
               </el-form-item>
