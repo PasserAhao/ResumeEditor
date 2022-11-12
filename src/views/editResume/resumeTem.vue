@@ -31,6 +31,7 @@ export default defineComponent({
     const router = useRouter()
     const imgUrl = ref([
       require('../../assets/img/resume/resume1.jpg'),
+      require('../../assets/img/resume/resume2.jpg'),
     ])
     return {
       imgUrl,router

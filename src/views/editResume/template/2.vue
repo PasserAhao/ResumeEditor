@@ -1,203 +1,205 @@
 <template>
   <div style="background: #cccdd3;height: calc(100vh - 60px);position: relative">
-    <!--      左边简历区域部分    -->
-    <!--      左边简历区域部分    -->
     <div style="overflow-y: scroll;height: calc(100vh - 60px);width: 70vw;">
       <div style="margin: 30px 0;">
         <!--  简历部分    -->
         <!--  简历部分    -->
         <!--  简历部分    -->
-        <div id="resume1" ref="resume1">
-          <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto">
-            <!--   简历左边部分     -->
-            <!--   简历左边部分     -->
-            <!--   简历左边部分     -->
-            <div style=";width: 240px;min-height: 1160px;float: left;position: relative"
-                 :style="{background:color.colorLeft}">
-              <!--   头像部分         -->
-              <!--   头像部分         -->
-              <div style="margin-bottom: 10px">
-                <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
-                  <template #error>
-                    <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
-                  </template>
-                </el-image>
-                <div @click="openFile" class="hidden_img">
-                  <camera style="margin-top: 60px" theme="outline" size="25" fill="#ffffff"/>
-                </div>
+        <!--  简历部分    -->
+        <div id="resume2">
+          <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;position: relative">
+            <!--    头部内容        -->
+            <div style="display: flex" :style="{color:color.BcgColorLeft}">
+              <div style="margin-left: 30px;margin-top: 20px">
+                <span style="font-size: 35px;padding: 3px 20px 3px 0;"
+                      :style="{borderRight:`${color.BcgColorLeft} solid 3px`}">
+                  {{ baseInfo.Title }}
+                </span>
               </div>
-              <!--     基础信息       -->
-              <!--     基础信息       -->
-              <div style="display: flex;flex-direction: column;margin: 15px 0 0 20px"
-                   :style="{color:color.fontColorLeft}">
-                <!--    年龄    -->
-                <div style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <calendar theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.age }}</span>
-                </div>
-                <!--    性别     -->
-                <div style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <male theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.gender }}</span>
-                </div>
-                <!--    地址     -->
-                <div v-if="userinfo.address" style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <local theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.address }}</span>
-                </div>
-                <!--    工作年限     -->
-                <div v-if="userinfo.workAge" style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <web-page theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.workAge }}</span>
-                </div>
-                <!--    电话     -->
-                <div style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <phone-call theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.phone }}</span>
-                </div>
-                <!--    邮箱     -->
-                <div style="margin-top: 15px;">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <mail-open theme="two-tone" size="18" :fill="[color.colorLeft ,'#ffffff']"/>
-                  </span>
-                  <span>&nbsp;&nbsp;{{ userinfo.email }}</span>
-                </div>
-
-
-              </div>
-              <!--      自定义信息        -->
-              <!--      自定义信息        -->
-              <div v-if="skillInfo.text" style="margin:50px 20px;font-size: 22px">
-                <MdEditor :style="{color:color.fontColorLeft,background:color.colorLeft}"
-                          :editor-id="skillInfo.text" :previewOnly="true" v-model="skillInfo.text"/>
-              </div>
-              <!--      技能特长        -->
-              <!--      技能特长        -->
-              <div v-if="skillInfo.skillList" style="margin: 50px 20px 0 20px ">
-                <h4 style="margin: 5px 0 10px 5px" :style="{color:skillInfo.skillTitleColor}">
-                  {{ skillInfo.skillTitle }}:
-                </h4>
-                <div v-for="(ski,idx) in skillInfo.skillList" :key="idx" style="margin-bottom: 5px">
-                  <el-progress :text-inside="true" :stroke-width="20" :percentage="ski.level" :color="ski.color">
-                    <span>{{ ski.skill }}</span>
-                  </el-progress>
-                </div>
-
-              </div>
-              <!--      兴趣爱好        -->
-              <!--      兴趣爱好        -->
-              <div v-if="skillInfo.hobbyList" style="margin: 50px 20px 0 20px">
-                <h4 style="margin: 5px 0 10px 5px" :style="{color:skillInfo.hobbyTitleColor}">
-                  {{ skillInfo.hobbyTitle }}:
-                </h4>
-                <div style="display: flex;flex-wrap: wrap">
-                  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span v-for="(hob,idx) in skillInfo.hobbyList" :key="idx" style="margin: 10px 5px">
-                    <span :style="{background:hob.bcgColor,color:hob.fontColor}"
-                          style="font-size: 16px;padding: 5px 10px;border-radius: 20px">
-                      {{ hob.hobby }}
-                    </span>
-                  </span>
-                </div>
+              <div style="margin-left: 15px">
+                <p style="font-size: 18px;margin-bottom: 3px">{{ baseInfo.text1 }}</p>
+                <h3 style="margin-top: 0">{{ baseInfo.text2 }}</h3>
               </div>
 
+              <div style="position: absolute;top: 33px;right: 60px">
+                <span :style="{background:color.BcgColorRight}"
+                      style="border-radius: 50%;padding: 12px 8px 7px 8px;margin-right: 20px">
+                  <bachelor-cap-one theme="outline" size="25" fill="#ffffff"/>
+                </span>
+                <span :style="{background:color.BcgColorRight}" style="border-radius: 50%;padding: 12px 8px 7px">
+                  <handbag theme="outline" size="25" fill="#ffffff"/>
+                </span>
+
+              </div>
             </div>
-            <!--    简历右边部分    -->
-            <!--    简历右边部分    -->
-            <!--    简历右边部分    -->
-            <div style="float: left;width: 580px;min-height: 1160px;">
-              <!--      求职意向        -->
-              <div :style="{color: color.fontColorRight1}">
-                <h1 style="margin: 0 0 15px 30px;padding-top: 30px">{{ userinfo.name }}</h1>
-                <div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap">
-                  <div v-for="(item,index) in userinfo.job" :key="index"
-                       style="width:290px;margin-bottom: 5px">
-                    <span style="font-size: 18px;margin-left: 50px">{{ item.title }}:{{ item.content }}</span>
-                  </div>
-                </div>
-              </div>
-              <!--      自定义模块        -->
-              <div style="overflow: hidden">
+            <!--    分割线条        -->
+            <div style="width: 100%;height: 18px;display: flex">
+              <div style="width: 496px;" :style="{borderBottom:`${color.BcgColorLeft} solid 18px`}"/>
+              <div style="width: 0;height: 0;border: 9px solid rgba(0,0,0,0)"
+                   :style="{borderLeftColor:color.BcgColorLeft,borderBottomColor:`${color.BcgColorLeft}`}"/>
+              <div style="width: 0;height: 0;border: 6px solid rgba(0,0,0,0);margin-left: -8px;margin-top: 6px"
+                   :style="{borderTopColor:`${color.BcgColorRight}`,borderRightColor:color.BcgColorRight}"/>
+              <div style="width: 302px;" :style="{borderBottom:`${color.BcgColorRight} solid 12px`}"/>
+            </div>
+            <!--    内容主体       -->
+            <div style="margin: 0 50px;">
+              <div style="height: 15px;" :style="{borderLeft:`${color.BcgColorLeft} solid 2px`}"/>
+              <!--     基本信息         -->
+              <div :style="{color:color.FontColor2}">
+                <!--     标题部分           -->
+                <div style="height: 24px;position: relative">
+                  <span style="padding: 0 10px 0 27px;margin-left: -17px;font-size: 16px"
+                        :style="{background:color.BcgColorLeft,color:color.TitleColor}">基本信息</span>
+                  <span style="position: absolute;width: 20px;height: 20px;clip-path: polygon(0 0, 0% 100%, 100% 100%)"
+                        :style="{background:color.BcgColorLeft}"/>
+                  <span
+                      style="position: absolute;height: 6px;width: 17px;top: 20px;left: -17px;clip-path: polygon(0 0, 100% 0, 100% 100%)"
+                      :style="{background:'rgba(0,0,0,0.5)'}"/>
 
-                <div v-for="(item,index) in ModuleList" :key="index">
-                  <div v-if="item.isShow">
-                    <!--      自定义模块头部            -->
-                    <div style="display: flex;justify-content: flex-start;width: 550px;margin: 20px auto">
-                      <div style="border-radius: 50px;padding: 7px 7px 5px 7px"
-                           :style="{background: color.fontColorRight1}">
-                        <book-open v-if="item.headerImg === 'bookOpen'" theme="outline" size="20" fill="#ffffff"/>
-                        <handbag v-if="item.headerImg === 'handbag1'" theme="outline" size="20" fill="#ffffff"/>
-                        <seo-folder v-if="item.headerImg === 'folder'" theme="outline" size="20" fill="#ffffff"/>
-                        <Briefcase v-if="item.headerImg === 'handbag2'" theme="outline" size="20" fill="#ffffff"/>
-                        <bachelor-cap-one v-if="item.headerImg === 'bachelorCap'" theme="outline" size="20"
-                                          fill="#ffffff"/>
-                        <medal-one v-if="item.headerImg === 'medal'" theme="outline" size="20" fill="#ffffff"/>
-                        <comment v-if="item.headerImg === 'comment'" theme="outline" size="20" fill="#ffffff"/>
-                        <star v-if="item.headerImg === 'star'" theme="outline" size="20" fill="#ffffff"/>
-                      </div>
-                      <div
-                          :style="{marginLeft: '15px',width: '495px',borderBottom:`${color.fontColorRight1} solid 2px`}">
-                        <span style="font-size: 16px;font-weight: bold;" :style="{color:color.fontColorRight1}">
-                          {{ item.moduleName }}
+                </div>
+                <!--     内容部分          -->
+                <div style="margin-top: -4px;overflow: hidden"
+                     :style="{borderLeft:`${color.BcgColorLeft} solid 2px`,borderTop:`${color.BcgColorLeft} solid 2px`}">
+                  <div style="overflow: hidden">
+                    <div style="float: left;min-height: 160px;width: 460px;margin: 15px 0 0 40px">
+                      <div style="display: flex;flex-wrap: wrap">
+                        <span style="width: 230px;margin-bottom: 10px">
+                          姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;{{userinfo.name}}
+                        </span>
+                        <span style="width: 230px;margin-bottom: 10px">
+                          年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄&nbsp;:{{userinfo.age}}
+                        </span>
+                        <span style="width: 230px;margin-bottom: 10px">
+                          性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;:{{userinfo.gender}}
+                        </span>
+                        <span v-if="userinfo.address" style="width: 230px;margin-bottom: 10px">
+                          籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯&nbsp;:{{userinfo.address}}
+                        </span>
+                        <span v-if="userinfo.workAge" style="width: 230px;margin-bottom: 10px">
+                          工&nbsp;作&nbsp;经&nbsp;验&nbsp;:{{userinfo.workAge}}
+                        </span>
+
+                        <span v-if="userinfo.job[0].isShow" style="width: 230px;margin-bottom: 10px">
+                          {{userinfo.job[0].title}}&nbsp;:{{userinfo.job[0].content}}
+                        </span>
+
+                        <span v-if="userinfo.job[1].isShow" style="width: 230px;margin-bottom: 10px">
+                          {{userinfo.job[1].title}}&nbsp;:{{userinfo.job[1].content}}
+                        </span>
+
+                        <span v-if="userinfo.job[2].isShow" style="width: 230px;margin-bottom: 10px">
+                          {{userinfo.job[2].title}}&nbsp;:{{userinfo.job[2].content}}
+                        </span>
+
+                        <span v-if="userinfo.job[3].isShow" style="width: 230px;margin-bottom: 10px">
+                          {{userinfo.job[3].title}}&nbsp;:{{userinfo.job[3].content}}
+                        </span>
+
+                        <span v-if="userinfo.phone" style="width: 230px;margin-bottom: 10px">
+                          电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话&nbsp;:{{userinfo.phone}}
+                        </span>
+                        <span v-if="userinfo.email" style="width: 230px;margin-bottom: 10px">
+                          邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;:{{userinfo.email}}
                         </span>
                       </div>
                     </div>
-                    <!--       自定义模块头部结束           -->
-                    <!--       自定义模块内容开始           -->
-                    <div v-for="(con,index2) in item.content" :key="index2"
-                         :style="{color:color.fontColorRight1}" style="width: 520px;margin: 0 auto;">
-                      <!--       自定义模块Title           -->
-                      <!--       自定义模块Title           -->
-                      <div v-if="con.title"
-                           style="display: flex;justify-content: space-between;width: 520px;font-size: 16px;">
-                        <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
-                        <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
-                        <div v-if="con.title.text2">{{ con.title.text2 }}</div>
-                        <div v-if="con.title.education">{{ con.title.education }}</div>
+                    <!--       头像             -->
+                    <div style="float: right;min-height: 160px;width: 200px">
+                      <div style="margin-bottom: 10px;position: relative">
+                        <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 15px 0 0 55px"
+                                  :src="imgUrl">
+                          <template #error>
+                            <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
+                          </template>
+                        </el-image>
+                        <div @click="openFile" class="hidden_img">
+                          <camera style="margin-top: 60px" theme="outline" size="25" fill="#ffffff"/>
+                        </div>
                       </div>
-                      <!--       自定义模块content           -->
-                      <!--       自定义模块content           -->
-                      <div>
-                        <MdEditor :style="{color:color.fontColorRight2}"
-                                  :editor-id="con.content" :previewOnly="true" v-model="con.content"/>
-                      </div>
-                      <!--       自定义模块Tag           -->
-                      <!--       自定义模块Tag           -->
-                      <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
-                        <div v-for="(tag,index3) in con.label" :key="index3">
-                          <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
-                               :style="{background:color.TagBackGround,border:`2px solid ${color.TagBorder}`}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--   循环部分   -->
+              <div v-for="(module,idx) in ModuleList" :key="idx">
+                <!--     标题部分           -->
+                <div style="height: 24px;position: relative">
+                  <span style="padding: 0 10px 0 27px;margin-left: -17px;font-size: 16px"
+                        :style="{background:color.BcgColorLeft,color:color.TitleColor}">{{ module.moduleName }}</span>
+                  <span style="position: absolute;width: 20px;height: 20px;clip-path: polygon(0 0, 0% 100%, 100% 100%)"
+                        :style="{background:color.BcgColorLeft}"/>
+                  <span
+                      style="position: absolute;height: 6px;width: 17px;top: 20px;left: -17px;clip-path: polygon(0 0, 100% 0, 100% 100%)"
+                      :style="{background:'rgba(0,0,0,0.5)'}"/>
+
+                </div>
+                <!--     内容部分          -->
+                <div style="margin-top: -4px"
+                     :style="{borderLeft:`${color.BcgColorLeft} solid 2px`,borderTop:`${color.BcgColorLeft} solid 2px`}">
+                  <div v-for="(con,index2) in module.content" :key="index2"
+                       :style="{color:color.FontColor}" style="width: 670px;margin: 0 auto;margin-top: 10px">
+                    <!--       自定义模块Title           -->
+                    <!--       自定义模块Title           -->
+                    <div v-if="con.title"
+                         style="display: flex;justify-content: space-between;width: 100%;font-size: 16px;">
+                      <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
+                      <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
+                      <div v-if="con.title.text2">{{ con.title.text2 }}</div>
+                      <div v-if="con.title.education">{{ con.title.education }}</div>
+                    </div>
+                    <!--       自定义模块content           -->
+                    <!--       自定义模块content           -->
+                    <div>
+                      <MdEditor :style="{color:color.FontColor2}"
+                                :editor-id="con.content" :previewOnly="true" v-model="con.content"/>
+                    </div>
+                    <!--       自定义模块Tag           -->
+                    <!--       自定义模块Tag           -->
+                    <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
+                      <div v-for="(tag,index3) in con.label" :key="index3" style="margin-bottom: 15px">
+                        <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
+                             :style="{background:color.TagBackGround,border:`2px solid ${color.TagBorder}`}">
                             <span style="padding: 10px;line-height: 28px" :style="{color:color.fontColorRight2}">
                               {{ tag }}
                             </span>
-                          </div>
                         </div>
                       </div>
-
                     </div>
+
                   </div>
-
-
                 </div>
-
               </div>
-
+              <!--              -->
+              <!--              -->
+              <!--              -->
             </div>
+
+
           </div>
         </div>
+        <!--  简历部分结束   -->
+        <!--  简历部分结束   -->
+        <!--  简历部分结束   -->
+        <!--  简历部分结束   -->
       </div>
-      <!--  简历部分结束   -->
     </div>
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
     <!--      右边操作栏部分    -->
     <!--      右边操作栏部分    -->
     <div id="ResumeEditor">
@@ -213,26 +215,25 @@
           </template>
           <!--     基础设置     -->
           <div style="width: 100%;text-align: center;height: calc(100vh - 60px);overflow-y: scroll">
-            <el-button v-print="'#resume1'" style="text-align: center">保存为PDF</el-button>
+            <el-button v-print="'#resume2'" style="text-align: center">保存为PDF</el-button>
             <!--     颜色配置       -->
             <div>
               <h3 style="text-align: left">颜色配置</h3>
               <div class="font1">
                 <div style="text-align: left;margin-top: 20px">
                   <span>皮肤颜色&nbsp;:&nbsp;</span>
-                  <el-color-picker v-model="color.colorLeft" show-alpha :predefine="predefineColors"/>
-                </div>
-
-                <div style="text-align: left;margin-top: 20px">
-                  <span>字体颜色(左边)&nbsp;:&nbsp;</span>
-                  <el-color-picker v-model="color.fontColorLeft" show-alpha :predefine="predefineColors"/>
-                </div>
-
-                <div style="text-align: left;margin-top: 20px">
-                  <span>字体颜色(右边)&nbsp;:&nbsp;</span>
-                  <el-color-picker v-model="color.fontColorRight1" show-alpha :predefine="predefineColors"/>
+                  <el-color-picker v-model="color.BcgColorLeft" show-alpha :predefine="predefineColors"/>
                   <span>&nbsp;&nbsp;&nbsp;</span>
-                  <el-color-picker v-model="color.fontColorRight2" show-alpha :predefine="predefineColors"/>
+                  <el-color-picker v-model="color.BcgColorRight" show-alpha :predefine="predefineColors"/>
+                </div>
+
+                <div style="text-align: left;margin-top: 20px">
+                  <span>字体颜色&nbsp;:&nbsp;</span>
+                  <el-color-picker v-model="color.TitleColor" show-alpha :predefine="predefineColors"/>
+                  <span>&nbsp;&nbsp;&nbsp;</span>
+                  <el-color-picker v-model="color.FontColor" show-alpha :predefine="predefineColors"/>
+                  <span>&nbsp;&nbsp;&nbsp;</span>
+                  <el-color-picker v-model="color.FontColor2" show-alpha :predefine="predefineColors"/>
                 </div>
 
                 <div style="text-align: left;margin-top: 20px">
@@ -243,6 +244,22 @@
                 </div>
 
               </div>
+
+              <div style="margin-top: 20px">
+                <span style="font-size: 14px;color: #606266">简历标题&nbsp;:&nbsp;&nbsp;</span>
+                <el-input v-model="baseInfo.Title" style="width: 244px"/>
+              </div>
+
+              <div style="margin-top: 20px">
+                <span style="font-size: 14px;color: #606266">文本内容&nbsp;:&nbsp;&nbsp;</span>
+                <el-input v-model="baseInfo.text1" style="width: 244px"/>
+              </div>
+
+              <div style="margin-top: 20px">
+                <span style="font-size: 14px;color: #606266">文本内容&nbsp;:&nbsp;&nbsp;</span>
+                <el-input v-model="baseInfo.text2" style="width: 244px"/>
+              </div>
+
 
             </div>
             <!--     模块配置       -->
@@ -354,98 +371,6 @@
               </el-form-item>
 
             </el-form>
-
-          </div>
-        </el-tab-pane>
-        <!--        技能特长-->
-        <!--        技能特长-->
-        <!--        技能特长-->
-        <el-tab-pane>
-          <template #label>
-            <div class="custom-tabs-label title-left">
-              <span class="title-item">技能特长</span>
-            </div>
-          </template>
-          <div class="EditBack">
-            <MdEditor style="height:200px" :editor-id="'skillAnd'" v-model="skillInfo.text" :preview="false"
-                      :toolbars="tooBars"/>
-            <!--      技能管理      -->
-            <!--      技能管理      -->
-            <!--      技能管理      -->
-            <div style="margin-bottom: 10px">
-              <h3>技能管理</h3>
-
-              <div>
-                <span class="font1">技能标题&nbsp;:&nbsp;&nbsp;</span>
-                <el-input v-model="skillInfo.skillTitle" style="width: 150px;margin-right: 15px"/>
-                <el-color-picker v-model="skillInfo.skillTitleColor" show-alpha :predefine="predefineColors"/>
-              </div>
-
-              <div style="margin-top: 25px">
-                <el-input style="width: 215px;" v-model="skillInfo.skill"/>
-                <el-button style="margin-left: 15px" type="success" @click="AddSkill(skillInfo.skill,true)">
-                  添加技能
-                </el-button>
-              </div>
-
-              <div style="display: flex;flex-wrap: wrap;">
-                <div v-for="(skill,index) in skillInfo.skillList" :key="index" style="margin-top: 15px">
-                  <div>
-                    <p class="font1" style="width: 320px">{{ skill.skill }}</p>
-                    <div style="width: 320px;display: flex;">
-                      <span style="width: 50%">
-                        <el-select v-model="skill.level" class="m-2" placeholder="Select" style="width: 100%">
-                          <el-option v-for="(it,id) in skillOption" :key="id" :label="it.label" :value="it.value"/>
-                        </el-select>
-                      </span>
-                      <span style="margin-left: 10px">
-                        <el-color-picker v-model="skill.color" show-alpha :predefine="predefineColors"/>
-                      </span>
-                      <span class="delete1" style="width: 30%" @click="DelSkill(skill.skill,true)">
-                        <delete theme="two-tone" size="16" :fill="['#ee194b' ,'#ffffff']"/>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--     爱好管理       -->
-            <!--     爱好管理       -->
-            <!--     爱好管理       -->
-            <div style="margin-bottom: 100px">
-              <h3>爱好管理</h3>
-
-              <div>
-                <span class="font1">爱好标题&nbsp;:&nbsp;&nbsp;</span>
-                <el-input v-model="skillInfo.bobbyTitle" style="width: 150px;margin-right: 15px"/>
-                <el-color-picker v-model="skillInfo.hobbyTitleColor" show-alpha :predefine="predefineColors"/>
-              </div>
-
-              <div style="margin-top: 25px">
-                <el-input style="width: 215px;" v-model="skillInfo.hobbyTitle"/>
-                <el-button style="margin-left: 15px" type="success" @click="AddSkill(skillInfo.hobby,false)">
-                  添加爱好
-                </el-button>
-              </div>
-
-              <div style="margin-top: 25px;display: flex;flex-wrap: wrap">
-                <div v-for="(bobby,index) in skillInfo.hobbyList" :key="index" style="margin: 15px 20px 15px 0">
-                  <span style="background: rgba(160,91,162,0.5);border-radius: 20px;padding: 10px">
-                    <span style="margin-right: 5px">{{ bobby.hobby }}</span>
-                    <span>
-                      <el-color-picker v-model="bobby.fontColor" show-alpha :predefine="predefineColors"/>
-                      <span>&nbsp;&nbsp;&nbsp;</span>
-                      <el-color-picker v-model="bobby.bcgColor" show-alpha :predefine="predefineColors"/>
-                    </span>
-                    <span class="delete2" @click="DelSkill(bobby.hobby,false)" style="margin-left: 10px">
-                      <delete theme="two-tone" size="16" :fill="['#ee194b' ,'#ffffff']"/>
-                    </span>
-                  </span>
-                </div>
-              </div>
-
-
-            </div>
 
           </div>
         </el-tab-pane>
@@ -567,7 +492,7 @@
 
     </div>
 
-    <input v-show="false" ref="imgInput" type="file" accept="image/*" @change="getImageUrl"
+    <input v-show="false" ref="imgInput2" type="file" accept="image/*" @change="getImageUrl"
            style="opacity: 0"/>
   </div>
 
@@ -580,18 +505,13 @@ import MdEditor from 'md-editor-v3';
 import {ElMessage} from 'element-plus'
 
 import {
-  Camera, Pic, Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag,
-  Comment, Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne, CircleDoubleUp, Delete,
+  CircleDoubleUp, Delete, Handbag, BachelorCapOne, Camera, Pic
 } from '@icon-park/vue-next';
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "1",
-  components: {
-    Camera, Pic, Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag, Comment,
-    Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne, CircleDoubleUp, Delete,
-    MdEditor,
-  },
+  components: {CircleDoubleUp, Delete, MdEditor, Handbag, BachelorCapOne, Camera, Pic},
   setup() {
     const router = useRouter()
     const tooBars = reactive([
@@ -625,10 +545,10 @@ export default defineComponent({
     ])
     // 头像处理
     const imageHandle = () => {
-      const imgUrl = ref("")
-      const imgInput = ref()
+      const imgUrl = ref(require('../../../assets/img/th.jpg'))
+      const imgInput2 = ref()
       const openFile = () => {
-        imgInput.value.dispatchEvent(new MouseEvent('click'))
+        imgInput2.value.dispatchEvent(new MouseEvent('click'))
       }
       const getImageUrl = (e) => {
         // 上传的文件
@@ -640,7 +560,7 @@ export default defineComponent({
         }
       }
       return {
-        imgInput, imgUrl,
+        imgInput2, imgUrl,
         openFile, getImageUrl,
       }
     }
@@ -648,12 +568,18 @@ export default defineComponent({
     const baseConfig = () => {
       const moduleDialog = ref(false)
       const tablePosition = ref('left')
+      const baseInfo = reactive({
+        Title: '个人简历',
+        text1: '细节决定成败',
+        text2: 'Personal resume',
+      })
 
       const color = reactive({
-        colorLeft: 'rgba(255,215,0,1)',
-        fontColorLeft: 'rgba(255,255,255,1)',
-        fontColorRight1: 'rgba(0,206,209,1)',
-        fontColorRight2: 'rgba(85,85,85,0.8)',
+        BcgColorLeft: '#80D2C8',
+        BcgColorRight: '#FFD4A9',
+        TitleColor: '#ffffff',
+        FontColor: '#000000',
+        FontColor2: '#555555',
         TagBorder: 'rgba(58,95,133,0.2)',
         TagBackGround: 'rgba(255,215,219,1)',
       })
@@ -961,7 +887,7 @@ export default defineComponent({
       }
 
       return {
-        color, tablePosition, Modules, moduleDialog, moduleForm,
+        color, baseInfo, tablePosition, Modules, moduleDialog, moduleForm,
         ModuleSortHandle, AddModules, AddTags, DelTags,
         isShowModule, AddChild, EditChild
       }
@@ -979,16 +905,16 @@ export default defineComponent({
         phone: "0595-87283169",
         email: "spongebob@163.com",
         job: [
-          {index: 1, isShow: true, title: "求职意向", content: "厨师"},
-          {index: 2, isShow: true, title: "意向城市", content: "比奇堡"},
-          {index: 3, isShow: true, title: "期望薪资", content: "10w"},
-          {index: 4, isShow: true, title: "到岗时间", content: "随时到岗"},
+          {index: 1, isShow: true, title: "求 职 岗 位", content: "厨师"},
+          {index: 2, isShow: false, title: "意 向 城 市", content: "比奇堡"},
+          {index: 3, isShow: false, title: "期 望 薪 资", content: "10w"},
+          {index: 4, isShow: false, title: "到 岗 时 间", content: "随时到岗"},
         ],
         jobIntention: [
-          {index: 1, isShow: true, title: "求职意向", content: "厨师"},
-          {index: 2, isShow: true, title: "意向城市", content: "比奇堡"},
-          {index: 3, isShow: true, title: "期望薪资", content: "10w"},
-          {index: 4, isShow: true, title: "到岗时间", content: "随时到岗"},
+          {index: 1, isShow: true, title: "求 职 岗 位", content: "厨师"},
+          {index: 2, isShow: false, title: "意 向 城 市", content: "比奇堡"},
+          {index: 3, isShow: false, title: "期 望 薪 资", content: "10w"},
+          {index: 4, isShow: false, title: "到 岗 时 间", content: "随时到岗"},
         ]
       })
       const workerAge = ref([
@@ -1129,22 +1055,22 @@ export default defineComponent({
 
 <style scoped>
 
-#resume1 .hidden_img {
+#resume2 .hidden_img {
   width: 124px;
   height: 154px;
   position: absolute;
-  top: 25px;
+  top: 15px;
   left: 55px;
   opacity: 0;
   display: flex;
   flex-direction: column;
   text-align: center;
+  cursor: pointer;
 }
 
-#resume1 .hidden_img:hover {
+#resume2 .hidden_img:hover {
   opacity: 0.8;
   background: #CDD0D6;
-  cursor: pointer;
 }
 
 </style>

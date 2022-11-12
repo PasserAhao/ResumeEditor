@@ -16,7 +16,7 @@
                  :style="{background:color.colorLeft}">
               <!--   头像部分         -->
               <!--   头像部分         -->
-              <div style="margin-bottom: 10px">
+              <div style="margin-bottom: 10px;position: relative">
                 <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
                   <template #error>
                     <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
@@ -198,6 +198,10 @@
       </div>
       <!--  简历部分结束   -->
     </div>
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
+    <!--      右边操作栏部分    -->
     <!--      右边操作栏部分    -->
     <!--      右边操作栏部分    -->
     <div id="ResumeEditor">
