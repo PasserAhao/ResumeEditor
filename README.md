@@ -3,4 +3,6 @@
 直接拉取代码在本地后直接执行 npm install安装所有依赖就可以直接运行。
 
 
+试用地址：http://bonianahao.com/EditResume/
+
 项目会持续更新更多的简历模板
