@@ -8,9 +8,15 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@icon-park/vue": "^1.4.2",
+    "@icon-park/vue-next": "^1.4.2",
     "core-js": "^3.8.3",
+    "element-plus": "^2.2.20",
+    "html2canvas": "^1.4.1",
+    "md-editor-v3": "^2.4.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vue3-print-nb": "^0.1.4",
     "vuex": "^4.0.0"
   },
   "devDependencies": {
