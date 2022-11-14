@@ -6,7 +6,6 @@ const routes = [
     {
         path: '/resumeTem', name: 'resumeTem', component: () => import('../views/editResume/EditResume'),
         children: [
-            {path: "", redirect: "/resumeTem/1"},
             {path: '1', name: '1', component: () => import('../views/editResume/template/1')},
             {path: '2', name: '2', component: () => import('../views/editResume/template/2')},
         ]
