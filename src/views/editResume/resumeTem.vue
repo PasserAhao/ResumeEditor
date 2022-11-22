@@ -1,8 +1,26 @@
 <template>
   <div id="resume" style="background: #ece9e9;">
     <!--  介绍  -->
-    <div style="background: #4cc9f0;width: 100vw;height: 300px"></div>
+    <div style="background: #4cc9f0;width: 100vw;height: 300px;">
+      <div style="font-size: 20px;font-weight: bold;width: 80%;margin: 0 auto">
+        <p style="margin: 0;padding-top: 50px">
+          <span style="color: red">注意:</span>
+          简历制作刷新会遇见白屏现象，所以尽量避免刷新。除了简历配置页面数据其他数据均作了本地缓存，关闭后重新进入会保持原有数据，但是颜色等数据需要重新配置
+        </p>
+        <p>
+          <span>以上问题会在近期修复，如有其他问题
+            <a  target="_blank" href="http://bonianahao.com/index/proFeedback">请点击反馈</a>
+          </span>
+        </p>
+        <p>
+          项目已经在Github上免费开源，如有学习需要
+          <a target="_blank" href="https://github.com/PasserAhao/ResumeEditor">请点击跳转</a>
+          （点亮右上角Star支持作者）
+        </p>
+      </div>
+    </div>
 
+    <!--  模板选择  -->
     <div style="width: 80%;margin: 0 auto;min-height: calc(100vh - 300px)">
       <h3 style="margin: 0;padding-top: 15px">选择模板</h3>
       <div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap">

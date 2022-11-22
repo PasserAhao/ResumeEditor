@@ -27,4 +27,5 @@ body {
 .el-tabs__item {
   font-size: 20px !important;
 }
+
 </style>
