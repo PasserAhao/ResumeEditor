@@ -1,15 +1,15 @@
 <template>
   <div id="resume1">
-    <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto">
+    <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden">
       <!--   简历左边部分     -->
       <!--   简历左边部分     -->
       <!--   简历左边部分     -->
-      <div style=";width: 240px;min-height: 1160px;float: left;position: relative"
-           :style="{background:colorsConfig[0].color[0].value}">
+      <div style="width: 240px;float: left;position: relative;"
+           :style="{background:colorsConfig[0].color[0].value,height:resumeHeight}">
         <!--   头像部分         -->
         <!--   头像部分         -->
         <div style="margin-bottom: 10px;position: relative">
-          <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
+          <el-image style="background: #f5f7fa;width: 124px;min-height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
             <template #error>
               <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
             </template>
@@ -107,7 +107,7 @@
       <!--    简历右边部分    -->
       <!--    简历右边部分    -->
       <!--    简历右边部分    -->
-      <div style="float: left;width: 580px;min-height: 1160px;">
+      <div style="float: left;width: 580px;min-height: 1160px;" ref="resume">
         <!--      求职意向        -->
         <div :style="{color: colorsConfig[2].color[0].value}">
           <h1 style="margin: 0 0 15px 30px;padding-top: 10px">{{ userinfo.name }}</h1>
@@ -190,25 +190,15 @@
   </div>
   <!--      右边操作栏部分    -->
   <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <ResumeEditor :colors="colorsConfig"
-                :u-info="userinfo" :skill="skillInfo"
-                :re-set="ModuleList" :md-set="ModuleConfig"/>
+  <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig"
+                :colors="colorsConfig" :skill="skillInfo"/>
   <input v-show="false" ref="imgInput" type="file" accept="image/*" @change="getImageUrl"
          style="opacity: 0"/>
 </template>
 
 <script>
-import {useStore} from 'vuex'
-import {useImgUrl} from '@/hooks/useImgUrl'
-import {defineComponent, reactive,} from "vue";
+import {useImgUrl, initInfo} from '@/hooks/useImgUrl'
+import {defineComponent, onMounted, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
 
@@ -225,13 +215,7 @@ export default defineComponent({
     Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne, MdEditor, ResumeEditor,
   },
   setup() {
-    const store = useStore()
-    //需要自己传入的参数
-    const userinfo = store.state.userInfo
-    const skillInfo = store.state.skillInfo
-    const ModuleConfig = store.state.modulesConfig
-    const ModuleList = store.state.resumeList
-
+    const temID = ref("tem1")
     const colorsConfig = reactive([
       {title: '皮肤颜色', color: [{value: 'rgba(255,215,0,1)'}]},
       {title: '字体颜色(左)', color: [{value: 'rgba(255,255,255,1)'}]},
@@ -239,9 +223,23 @@ export default defineComponent({
       {title: '标签颜色', color: [{value: 'rgba(58,95,133,0.2)'}, {value: 'rgba(255,215,219,1)'}]},
     ])
 
+    const resume = ref(null)
+    const resumeHeight = ref(`1160px`)
+    onMounted(()=>{
+      window.addEventListener("click",()=>{
+        const pageHeight = resume.value.offsetHeight
+        if (pageHeight > 1160){
+          resumeHeight.value = `${Math.ceil(pageHeight / 1160)*1160}px`
+        }else {
+          resumeHeight.value = `1160px`
+        }
+      })
+    })
+
     return {
-      colorsConfig,
-      userinfo, ModuleList, ModuleConfig, skillInfo,
+      resume, resumeHeight,
+      colorsConfig, temID,
+      ...initInfo(temID.value, colorsConfig),
       ...useImgUrl(),
     }
   }

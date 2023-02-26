@@ -1,5 +1,5 @@
 <template>
-  <div class="ResumeEditor">
+  <div class="ResumeEditor" @keyup="saveInfo" @mouseup="saveInfo">
     <el-tabs type="border-card" class="demo-tabs Edit-table" tab-position="left">
       <!--     简历配置   -->
       <!--     简历配置   -->
@@ -17,7 +17,8 @@
             <el-form>
               <el-form-item v-for="(col,idx) in colors" :key="idx" :label="col.title">
                   <span v-for="(item,idx2) in col.color" :key="idx2">
-                    <el-color-picker v-model="item.value" show-alpha :predefine="predefineColors"/>
+                    <el-color-picker v-model="item.value" show-alpha :predefine="predefineColors"
+                    @change="saveInfo"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                   </span>
               </el-form-item>
@@ -72,11 +73,11 @@
           <el-form style="height: calc(100vh - 60px);overflow-y: scroll">
             <h3>基本信息设置</h3>
             <el-form-item label="你的姓名:">
-              <el-input v-model="userinfo.name" @change="ChangeToLocal2"></el-input>
+              <el-input v-model="userinfo.name"></el-input>
             </el-form-item>
 
             <el-form-item label="性别:" style="margin-top: 15px">
-              <el-radio-group v-model="userinfo.gender" class="ml-4" @change="ChangeToLocal2">
+              <el-radio-group v-model="userinfo.gender" class="ml-4">
                 <el-radio label="男">男</el-radio>
                 <el-radio label="女">女</el-radio>
               </el-radio-group>
@@ -90,24 +91,24 @@
             </el-form-item>
 
             <el-form-item label="地址:" style="margin-top: 15px">
-              <el-input v-model="userinfo.address" style="width: 230px;" @change="ChangeToLocal2"></el-input>
+              <el-input v-model="userinfo.address" style="width: 230px;"></el-input>
               <el-checkbox v-model="isShowD.address" style="margin-left: 15px" name="type"
                            @change="isShowAddressHandle"/>
             </el-form-item>
 
             <el-form-item label="工作年限:">
               <el-select v-model="userinfo.workAge" class="m-2" placeholder="Select">
-                <el-option v-for="item in workerAgeOption" @change="ChangeToLocal2"
+                <el-option v-for="item in workerAgeOption"
                            :key="item.value" :label="item.label" :value="item.value"/>
               </el-select>
             </el-form-item>
 
             <el-form-item label="电话:" style="margin-top: 15px">
-              <el-input v-model="userinfo.phone" @change="ChangeToLocal2"></el-input>
+              <el-input v-model="userinfo.phone"></el-input>
             </el-form-item>
 
             <el-form-item label="邮箱:">
-              <el-input v-model="userinfo.email" @change="ChangeToLocal2"></el-input>
+              <el-input v-model="userinfo.email"></el-input>
             </el-form-item>
 
             <h3>求职意向</h3>
@@ -158,8 +159,7 @@
 
             <div>
               <span class="font1">技能标题&nbsp;:&nbsp;&nbsp;</span>
-              <el-input v-model="skillInfo.skillTitle" style="width: 150px;margin-right: 15px"
-                        @change="ChangeToLocal3"/>
+              <el-input v-model="skillInfo.skillTitle" style="width: 150px;margin-right: 15px"/>
               <el-color-picker v-model="skillInfo.skillTitleColor" show-alpha :predefine="predefineColors"/>
             </div>
 
@@ -176,14 +176,12 @@
                   <p class="font1" style="width: 320px">{{ skill.skill }}</p>
                   <div style="width: 320px;display: flex;">
                     <span style="width: 50%">
-                        <el-select v-model="skill.level" class="m-2" placeholder="Select" style="width: 100%"
-                                   @change="ChangeToLocal3">
+                        <el-select v-model="skill.level" class="m-2" placeholder="Select" style="width: 100%">
                           <el-option v-for="(it,id) in skillOption" :key="id" :label="it.label" :value="it.value"/>
                         </el-select>
                       </span>
                     <span style="margin-left: 10px">
-                        <el-color-picker v-model="skill.color" show-alpha :predefine="predefineColors"
-                                         @change="ChangeToLocal3"/>
+                        <el-color-picker v-model="skill.color" show-alpha :predefine="predefineColors"/>
                       </span>
                     <span class="delete1" style="width: 30%" @click="DelSkill(skill.skill,true)">
                       <delete theme="two-tone" size="16" :fill="['#ee194b' ,'#ffffff']"/>
@@ -201,8 +199,7 @@
 
             <div>
               <span class="font1">爱好标题&nbsp;:&nbsp;&nbsp;</span>
-              <el-input v-model="skillInfo.hobbyTitle" style="width: 150px;margin-right: 15px"
-                        @change="ChangeToLocal3"/>
+              <el-input v-model="skillInfo.hobbyTitle" style="width: 150px;margin-right: 15px"/>
               <el-color-picker v-model="skillInfo.hobbyTitleColor" show-alpha :predefine="predefineColors"/>
             </div>
 
@@ -218,11 +215,9 @@
                   <span style="background: rgba(160,91,162,0.5);border-radius: 20px;padding: 10px">
                     <span style="margin-right: 5px">{{ bobby.hobby }}</span>
                     <span>
-                      <el-color-picker v-model="bobby.fontColor" show-alpha :predefine="predefineColors"
-                                       @change="ChangeToLocal3"/>
+                      <el-color-picker v-model="bobby.fontColor" show-alpha :predefine="predefineColors"/>
                       <span>&nbsp;&nbsp;&nbsp;</span>
-                      <el-color-picker v-model="bobby.bcgColor" show-alpha :predefine="predefineColors"
-                                       @change="ChangeToLocal3"/>
+                      <el-color-picker v-model="bobby.bcgColor" show-alpha :predefine="predefineColors"/>
                     </span>
                     <span class="delete2" @click="DelSkill(bobby.hobby,false)" style="margin-left: 10px">
                       <delete theme="two-tone" size="16" :fill="['#ee194b' ,'#ffffff']"/>
@@ -238,7 +233,7 @@
       </el-tab-pane>
       <!--    自定义模块    -->
       <!--    自定义模块    -->
-      <el-tab-pane v-for="(module,index) in Modules" :key="index">
+      <el-tab-pane v-for="(module,index) in ModuleConfig" :key="index">
         <!--模块Label-->
         <template #label>
           <div class="custom-tabs-label title-left">
@@ -251,8 +246,12 @@
           <div style="position: relative">
             <h3 style="text-align: left">{{ module.moduleName }}</h3>
             <span style="position: absolute;left: 85px;top: -3px;">
-                <el-switch style="width: 10px" v-model="module.isAdd" @change="isAddModule(module)"/>
-              </span>
+              <el-switch style="width: 10px" v-model="module.isAdd" @change="isAddModule(module)"/>
+            </span>
+            <span v-if="!module.isTem"
+                  style="position: absolute;left: 290px;top: 2px;cursor: pointer" @click="delModel(module.moduleName)">
+              <delete theme="two-tone" size="22" :fill="['#ee194b' ,'#ffffff']"/>
+            </span>
           </div>
           <!--模块内容-->
           <div v-if="module.isAdd">
@@ -269,36 +268,36 @@
                   </span>
                 <!--删除模块项目-->
                 <span v-if="module.AllowChild">
-                    <span style="margin-left: 15px;cursor: pointer" @click="EditChild(module,item.id,true)">
+                  <span style="margin-left: 15px;cursor: pointer" @click="EditChild(module,item.id,true)">
                     <delete theme="two-tone" size="22" :fill="['#ee194b' ,'#ffffff']"/>
                   </span>
-                  </span>
+                </span>
               </div>
               <!--项目基本信息-->
               <div>
                 <!--项目名称-->
                 <div v-if="module.text1" style="margin-bottom: 15px">
                   <span class="font1">{{ module.text1 }}&nbsp;:&nbsp;&nbsp;</span>
-                  <el-input v-model="item.title.text1" style="width: 235px" @change="ChangeToLocal1"></el-input>
+                  <el-input v-model="item.title.text1" style="width: 235px"></el-input>
                 </div>
                 <!--项目角色-->
                 <div v-if="module.text2" style="margin-bottom: 15px">
                   <span class="font1">{{ module.text2 }}&nbsp;:&nbsp;&nbsp;</span>
-                  <el-input v-model="item.title.text2" style="width: 235px" @change="ChangeToLocal1"></el-input>
+                  <el-input v-model="item.title.text2" style="width: 235px"></el-input>
                 </div>
                 <!--项目时间-->
                 <div v-if="module.text3" style="margin-bottom: 15px">
                   <span class="font1">{{ module.text3 }}&nbsp;:&nbsp;&nbsp;</span>
-                  <el-date-picker style="width: 103px" v-model="item.title.date1" type="month"
-                                  value-format="YYYY-MM" @change="ChangeToLocal1"/>
+                  <el-date-picker style="width: 102px" v-model="item.title.date1" type="month"
+                                  value-format="YYYY-MM"/>
                   <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
-                  <el-date-picker style="width: 103px" v-model="item.title.date2" type="month"
-                                  value-format="YYYY-MM" @change="ChangeToLocal1"/>
+                  <el-date-picker style="width: 102px" v-model="item.title.date2" type="month"
+                                  value-format="YYYY-MM"/>
                 </div>
                 <!--项目学历-->
                 <div v-if="module.text4" style="margin-bottom: 15px">
                   <span class="font1">{{ module.text4 }}&nbsp;:&nbsp;&nbsp;</span>
-                  <el-select v-model="item.title.education" class="m-2" placeholder="Select" @change="ChangeToLocal1">
+                  <el-select v-model="item.title.education" class="m-2" placeholder="Select">
                     <el-option v-for="edu in module.eduOptions" :key="edu.value" :label="edu.label"
                                :value="edu.value"/>
                   </el-select>
@@ -362,45 +361,47 @@ import {defineComponent, reactive, ref} from "vue";
 import {CircleDoubleUp, Delete} from '@icon-park/vue-next';
 import MdEditor from 'md-editor-v3';
 import {ElMessage} from "element-plus";
-import {useStore} from "vuex";
-import store from "@/store";
 
 
 export default defineComponent({
   name: "ResumeEditor",
   components: {MdEditor, CircleDoubleUp, Delete},
   props: {
+    temId: {
+      type: String,
+    },
+    reSet: {
+      type: Array,
+      // default: store.state.resumeList
+    },
+    mdSet: {// 操作栏初始模板内容
+      type: Array,
+      // default: store.state.modulesConfig
+    },
+    uInfo: { //用户的基本信息
+      type: Object,
+      // default: store.state.userInfo
+    },
+    colors: { // 简历的基本配色，文字颜色等
+      type: Array,
+      // default: store.state.colors
+    },
+
     showSkill: {
       type: Boolean,
       default: true,
     },
-    reSet: {
-      type: Array,
-      default: store.state.resumeList
-    },
-    mdSet: {// 操作栏初始模板内容
-      type: Array,
-      default: store.state.modulesConfig
+    skill: { //用户的技能爱好
+      type: Object,
+      // default: store.state.skillInfo
     },
     titles: { // 这个是顶部或者其他地方有需要修改的文字
       type: Array,
     },
-    colors: { // 简历的基本配色，文字颜色等
-      type: Array,
-      default: store.state.colors
-    },
-    uInfo: { //用户的基本信息
-      type: Object,
-      default: store.state.userInfo
-    },
-    skill: { //用户的技能爱好
-      type: Object,
-      default: store.state.skillInfo
-    },
+
+
   },
   setup(props) {
-    const store = useStore()
-
     const Dialog = ref(false)
     const tooBars = reactive([
       'bold',
@@ -426,34 +427,13 @@ export default defineComponent({
     ])
 
     //简历配置
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    let ModuleList = props.reSet
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    let ModuleConfig = props.mdSet
     const resumeConfig = () => {
-      const ModuleList = props.reSet
-      const Modules = props.mdSet
-      // 将localStorage中的数据取出来
-      const isLocal = ref(false)
-      Modules.forEach((item, index) => {
-        const data = JSON.parse(localStorage.getItem(item.moduleName))
-        if (data) {
-          Modules.splice(index, 1)
-          Modules.splice(index, 0, data)
-        }
-        const data2 = JSON.parse(localStorage.getItem(`re_${item.moduleName}`))
-        if (data2) {
-          isLocal.value = true
-        }
-      })
-      if (isLocal.value) {
-        ModuleList.splice(0, ModuleList.length)
-        Modules.forEach((item) => {
-          const data = JSON.parse(localStorage.getItem(`re_${item.moduleName}`))
-          if (data) {
-            ModuleList.push(data)
-          }
-        })
-      }
-
       // 将编辑器关联的属性复制给展示的编辑器
-      Modules.forEach((item2) => {
+      ModuleConfig.forEach((item2) => {
         const isAdd = ref(false)
         ModuleList.forEach((item) => {
           if (item.moduleName === item2.moduleName) {
@@ -479,11 +459,10 @@ export default defineComponent({
           ModuleList.forEach((item, index) => {
             if (item.moduleName === module.moduleName) {
               ModuleList.splice(index, 1)
-              localStorage.removeItem(`re_${item.moduleName}`)
             }
           })
         }
-        ChangeToLocal1()
+        saveInfo()
       }
 
       // 给自定义模块添加新的项目
@@ -493,7 +472,7 @@ export default defineComponent({
         dic.editor_id = `${module.moduleName}${dic.id}`
         module.moduleContent.content.push(JSON.parse(JSON.stringify(dic)))
         module.index += 1
-        ChangeToLocal1()
+        saveInfo()
       }
       // 自定义模块的删除和排序(模块，)
       const EditChild = (module, id, isDel) => {
@@ -509,7 +488,7 @@ export default defineComponent({
             }
           }
         })
-        ChangeToLocal1()
+        saveInfo()
       }
       // 标签的添加和删除(标签名字，标签数组，是否添加)
       const EditTags = (name, arr, isAdd) => {
@@ -522,14 +501,14 @@ export default defineComponent({
             }
           })
         }
-
-        ChangeToLocal1()
+        saveInfo()
       }
 
       // 模块方法
       const moduleForm = reactive({
         index: 1,
         moduleName: "",
+        isTem: false,
         isAdd: false,
         AllowChild: false,
         text1: '',
@@ -555,7 +534,7 @@ export default defineComponent({
       // 添加自定义模块
       const AddModules = () => {
         const isAdd = ref(true)
-        Modules.forEach((item) => {
+        ModuleConfig.forEach((item) => {
           if (item.moduleName === moduleForm.moduleName) {
             ElMessage.warning("模块已经存在，请勿重复添加")
             isAdd.value = false
@@ -564,10 +543,10 @@ export default defineComponent({
         if (isAdd.value) {
           moduleForm.moduleContent.moduleName = moduleForm.moduleName
           moduleForm.moduleContent.content[0].editor_id = `${moduleForm.moduleName}1`
-          Modules.push(JSON.parse(JSON.stringify(moduleForm)))
+          ModuleConfig.push(JSON.parse(JSON.stringify(moduleForm)))
           Dialog.value = false
         }
-
+        saveInfo()
       }
       // 模块上移(MdList)
       const ModuleSort = (data, isUp) => {
@@ -582,29 +561,29 @@ export default defineComponent({
             }
           }
         })
-
-      }
-
-      // 检测到数据改变立即本地化存储
-      const ChangeToLocal1 = () => {
-        Modules.forEach((item) => {
-          localStorage.setItem(`${item.moduleName}`, JSON.stringify(item))
-        })
-        ModuleList.forEach((item) => {
-          localStorage.setItem(`re_${item.moduleName}`, JSON.stringify(item))
-        })
+        saveInfo()
       }
 
       return {
-        store, Modules, moduleForm, ModuleList,
+        ModuleConfig, moduleForm, ModuleList,
         isAddModule, AddModules, ModuleSort,
         AddChild, EditChild, EditTags,
-        ChangeToLocal1
       }
     }
+
     //基本信息
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    const userinfo = props.uInfo
     const baseInfo = () => {
       const isShowD = reactive({address: true, date: true})
+      // 从本地缓存取出记录
+      const isShowD_local = JSON.parse(localStorage.getItem("isShowD"))
+      if (isShowD_local) {
+        for (let key in isShowD_local) {
+          isShowD[key] = isShowD_local[key]
+        }
+      }
+
       const workerAgeOption = ref([
         {value: false, label: '不填',},
         {value: '应届生', label: '应届生',},
@@ -632,46 +611,8 @@ export default defineComponent({
       })
 
       // 用户基本信息
-      const userinfo = props.uInfo
       userinfo.job = [JobIntention.work0, JobIntention.work1, JobIntention.work2, JobIntention.work3]
-      const data = JSON.parse(localStorage.getItem('userinfo'))
-      const isShowD_local = JSON.parse(localStorage.getItem('isShowD'))
-      if (data) {
-        userinfo.name = data.name
-        userinfo.age = data.age
-        userinfo.date = data.date
-        userinfo.gender = data.gender
-        userinfo.address = data.address
-        userinfo.workAge = data.workAge
-        userinfo.phone = data.phone
-        userinfo.email = data.email
-        userinfo.job = data.job
 
-        data.job.forEach((item1) => {
-          if (item1.title === "求 职 意 向") {
-            JobIntention.work0.isShow = true
-            JobIntention.work0.content = item1.content
-          } else if (item1.title === "意 向 城 市") {
-            JobIntention.work1.isShow = true
-            JobIntention.work1.content = item1.content
-          } else if (item1.title === "期 望 薪 资") {
-            JobIntention.work2.isShow = true
-            JobIntention.work2.content = item1.content
-          } else if (item1.title === "到 岗 时 间") {
-            JobIntention.work3.isShow = true
-            JobIntention.work3.content = item1.content
-          }
-        })
-      } else {
-        JobIntention.work0.isShow = true
-        JobIntention.work1.isShow = true
-        JobIntention.work2.isShow = true
-        JobIntention.work3.isShow = true
-      }
-      if (isShowD_local) {
-        isShowD.date = isShowD_local.date
-        isShowD.address = isShowD_local.address
-      }
       // 选择日期后立马复制给需要展示的值
       const DateChange = (value) => {
         if (isShowD.date) {
@@ -679,7 +620,6 @@ export default defineComponent({
         } else {
           userinfo.age = value
         }
-        ChangeToLocal2()
       }
       // 将日期转换成数字（年龄）
       const DateToNum = (value) => {
@@ -692,12 +632,15 @@ export default defineComponent({
           userinfo.age = aaa
           userinfo.age = userinfo.date
         }
-        ChangeToLocal2()
+
+        isShowD.date = value
+        localStorage.setItem('isShowD', JSON.stringify(isShowD))
       }
       // 是否显示地址
       const isShowAddressHandle = (value) => {
         userinfo.address = value === true ? "地球村" : false
-        ChangeToLocal2()
+        isShowD.address = value
+        localStorage.setItem('isShowD', JSON.stringify(isShowD))
       }
       // 负责关于求职信息的顺序显示
       const jobHandle = (value, num, data) => {
@@ -710,7 +653,7 @@ export default defineComponent({
             }
           })
         }
-        ChangeToLocal2()
+        localStorage.setItem('userinfo', JSON.stringify(isShowD))
       }
       const jobIntentionHandle1 = (value) => {
         jobHandle(value, 0, "求 职 意 向")
@@ -725,20 +668,17 @@ export default defineComponent({
         jobHandle(value, 3, "到 岗 时 间")
       }
 
-      // 检测到数据改变立即本地化存储
-      const ChangeToLocal2 = () => {
-        localStorage.setItem('userinfo', JSON.stringify(userinfo))
-        localStorage.setItem('isShowD', JSON.stringify(isShowD))
-      }
-
       return {
         userinfo, workerAgeOption, isShowD, JobIntention,
         DateToNum, DateChange, isShowAddressHandle,
         jobIntentionHandle1, jobIntentionHandle2, jobIntentionHandle3, jobIntentionHandle4,
-        ChangeToLocal2,
       }
     }
+
+
     // 技能特长
+    // eslint-disable-next-line vue/no-setup-props-destructure
+    const skillInfo = props.skill
     const skill = () => {
       const skillOption = reactive([
         {value: 40, label: "了解"},
@@ -751,19 +691,6 @@ export default defineComponent({
       ])
 
       const isShowSkill = props.showSkill
-      const skillInfo = props.skill
-      const data = JSON.parse(localStorage.getItem('skillInfo'))
-      if (data) {
-        skillInfo.text = data.text
-        skillInfo.isSkill = data.isSkill
-        skillInfo.skillTitle = data.skillTitle
-        skillInfo.skillTitleColor = data.skillTitleColor
-        skillInfo.skillList = data.skillList
-        skillInfo.isHobby = data.isHobby
-        skillInfo.hobbyTitle = data.hobbyTitle
-        skillInfo.hobbyTitleColor = data.hobbyTitleColor
-        skillInfo.skillList = data.skillList
-      }
 
       const AddSkill = (data, isSkill) => {
         if (isSkill) {
@@ -775,7 +702,8 @@ export default defineComponent({
           skillInfo.skill = ''
           skillInfo.isHobby = true
         }
-        ChangeToLocal3()
+
+        localStorage.setItem('skillInfo', JSON.stringify(skillInfo))
       }
       const DelSkill = (data, isSkill) => {
         if (isSkill) {
@@ -798,24 +726,55 @@ export default defineComponent({
           })
         }
 
-        ChangeToLocal3()
-
-      }
-
-      // 检测到数据改变立即本地化存储
-      const ChangeToLocal3 = () => {
         localStorage.setItem('skillInfo', JSON.stringify(skillInfo))
       }
 
       return {
         skillInfo, skillOption, isShowSkill,
         AddSkill, DelSkill,
-        ChangeToLocal3
       }
     }
 
+    // 通用方法
+    // 把数据保存到本地缓存
+    const saveInfo = () => {
+      // 检测到数据改变立即本地化存储
+      localStorage.setItem(`ModuleConfig`, JSON.stringify(ModuleConfig))
+      localStorage.setItem(`ModuleList`, JSON.stringify(ModuleList))
+
+      localStorage.setItem('userinfo', JSON.stringify(userinfo))
+
+      if (typeof skill().skillInfo !== "undefined") {
+        localStorage.setItem('skillInfo', JSON.stringify(skillInfo))
+      }
+
+      // eslint-disable-next-line vue/no-setup-props-destructure
+      const color = props.colors
+      // eslint-disable-next-line vue/no-setup-props-destructure
+      const id = props.temId
+      localStorage.setItem(`${id}_color`, JSON.stringify(color))
+    }
+    // 删除自定义模块
+    const delModel = (name) => {
+      for (let i = 0; i < ModuleConfig.length; i++) {
+        const moduleName = ModuleConfig[i].moduleName
+        if (moduleName === name) {
+          ModuleConfig.splice(i, 1)
+        }
+      }
+
+      for (let i = 0; i < ModuleList.length; i++) {
+        const moduleName = ModuleConfig[i].moduleName
+        if (moduleName === name) {
+          ModuleList.splice(i, 1)
+        }
+      }
+
+      saveInfo()
+    }
+
     return {
-      Dialog, tooBars, predefineColors,
+      Dialog, tooBars, predefineColors, saveInfo, delModel,
       ...resumeConfig(), ...baseInfo(), ...skill(),
     }
   }

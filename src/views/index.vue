@@ -5,10 +5,13 @@
       <div style="font-size: 20px;font-weight: bold;width: 80%;margin: 0 auto">
         <p style="margin: 0;padding-top: 50px">
           <span style="color: red">注意:</span>
-          简历制作刷新会遇见白屏现象，所以尽量避免刷新。除了简历配置页面数据其他数据均作了本地缓存，关闭后重新进入会保持原有数据，但是颜色等数据需要重新配置
+          刷新出现白屏后重新进入就好了，原来的数据会自动保存
         </p>
         <p>
-          <span>以上问题会在近期修复，如有其他问题
+          简历在线生成pdf项目为小张同志原创（切勿商用），欢迎大家讨论学习。联系WX:Hao3688688 (备注来意，否则不通过)
+        </p>
+        <p>
+          <span>没有心怡的模板？网站有BUG？请
             <a  target="_blank" href="http://bonianahao.com/index/proFeedback">请点击反馈</a>
           </span>
         </p>
@@ -26,7 +29,7 @@
       <div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap">
         <!--   模板图片     -->
         <div v-for="(url,index) in imgUrl" :key="index" style="margin: 15px;position: relative">
-          <div @click="router.push({path:`/resumeTem/${index+1}`})">
+          <div @click="router.push({path:`/template/${index+1}`})">
             <el-image :src="url" class="img"></el-image>
             <div class="img_top">
               <span style="color: white;">点击编辑</span>
@@ -48,8 +51,8 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const imgUrl = ref([
-      require('../../assets/img/resume/resume1.jpg'),
-      require('../../assets/img/resume/resume2.jpg'),
+      require('../assets/img/resume/resume1.jpg'),
+      require('../assets/img/resume/resume2.jpg'),
     ])
     return {
       imgUrl,router

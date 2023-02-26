@@ -162,29 +162,19 @@
         <!--              -->
       </div>
 
-
     </div>
   </div>
   <!--      右边操作栏部分    -->
   <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <!--      右边操作栏部分    -->
-  <ResumeEditor :colors="colorsConfig" :show-skill="false" :titles="baseInfo"
-                :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig"/>
+  <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig"
+                :colors="colorsConfig" :show-skill="false" :titles="baseInfo"/>
   <input v-show="false" ref="imgInput" type="file" accept="image/*" @change="getImageUrl"
          style="opacity: 0"/>
 </template>
 
 <script>
-import {useStore} from 'vuex'
-import {useImgUrl} from '@/hooks/useImgUrl'
-import {defineComponent, reactive,} from "vue";
+import {useImgUrl, initInfo} from '@/hooks/useImgUrl'
+import {defineComponent, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
 
@@ -195,12 +185,7 @@ export default defineComponent({
   name: "2",
   components: {Camera, Pic, Handbag, BachelorCapOne, MdEditor, ResumeEditor,},
   setup() {
-    const store = useStore()
-    //需要自己传入的参数
-    const userinfo = store.state.userInfo
-    const ModuleConfig = store.state.modulesConfig
-    const ModuleList = store.state.resumeList
-
+    const temID = ref("tem2")
     const colorsConfig = reactive([
       {title: '皮肤颜色', color: [{value: '#80D2C8'}, {value: '#FFD4A9'},]},
       {title: '字体颜色', color: [{value: '#ffffff'}, {value: '#000000'}, {value: '#555555'}]},
@@ -213,8 +198,9 @@ export default defineComponent({
     ])
 
     return {
-      baseInfo, colorsConfig,
-      userinfo, ModuleList, ModuleConfig,
+      baseInfo,
+      colorsConfig, temID,
+      ...initInfo(temID.value, colorsConfig),
       ...useImgUrl(),
     }
   }

@@ -38,6 +38,7 @@ export default createStore({
     modulesConfig:reactive([
       {
         index:1,
+        isTem:true,
         moduleName: "专业技能",
         isAdd: false,
         AllowChild: false,
@@ -62,6 +63,7 @@ export default createStore({
       },
       {
         index: 2,
+        isTem:true,
         moduleName: "工作经验",
         isAdd: true,
         AllowChild: true,
@@ -93,6 +95,7 @@ export default createStore({
       },
       {
         index: 1,
+        isTem:true,
         moduleName: "项目经验",
         isAdd: true,
         AllowChild: true,
@@ -118,6 +121,7 @@ export default createStore({
       },
       {
         index:1,
+        isTem:true,
         moduleName: "教育背景",
         isAdd: false,
         AllowChild: true,
@@ -146,6 +150,7 @@ export default createStore({
       },
       {
         index: 1,
+        isTem:true,
         moduleName: "实习经验",
         isAdd: false,
         AllowChild: true,
@@ -171,6 +176,7 @@ export default createStore({
       },
       {
         index: 1,
+        isTem:true,
         moduleName: "校园经历",
         isAdd: false,
         AllowChild: true,
@@ -196,6 +202,7 @@ export default createStore({
       },
       {
         index: 1,
+        isTem:true,
         moduleName: "荣誉证书",
         isAdd: true,
         AllowChild: false,
@@ -224,6 +231,7 @@ export default createStore({
       },
       {
         index: 1,
+        isTem:true,
         moduleName: "自我评价",
         isAdd: true,
         AllowChild: false,
