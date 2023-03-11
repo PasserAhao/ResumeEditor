@@ -1,7 +1,7 @@
 import {ref} from "vue";
 import {useStore} from "vuex"
 
-export function useImgUrl() {
+export function userInfoHandle() {
     const imgUrl = ref(require('../assets/img/th.jpg'))
     const imgInput = ref()
     const openFile = () => {
@@ -30,7 +30,15 @@ export function initInfo(temId,colorsConfig) {
     if (String(data1) !== "null" && String(data1) !== "undefined") {
         let data = JSON.parse(data1)
         for (let key in data) {
-            userinfo[key] = data[key]
+            if(key !== "job"){
+                userinfo[key] = data[key]
+            }else {
+                console.log("asdasd")
+                userinfo["job"] = []
+                for (let item of data["job"]){
+                    userinfo["job"].push(item)
+                }
+            }
         }
     }
 

@@ -54,29 +54,30 @@
           <div style="margin-top: -4px;overflow: hidden"
                :style="{borderLeft:`${colorsConfig[0].color[0].value} solid 2px`,borderTop:`${colorsConfig[0].color[0].value} solid 2px`}">
             <div style="overflow: hidden">
-              <div style="float: left;min-height: 160px;width: 460px;margin: 15px 0 0 40px">
+              <div style="float: left;min-height: 160px;width: 478px;margin: 15px 0 0 40px">
                 <div style="display: flex;flex-wrap: wrap">
-                  <span style="width: 230px;margin-bottom: 10px">
-                    姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;{{ userinfo.name }}
-                  </span>
-                  <span style="width: 230px;margin-bottom: 10px">
-                    年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄&nbsp;:{{ userinfo.age }}
-                  </span>
-                  <span style="width: 230px;margin-bottom: 10px">
-                    性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别&nbsp;:{{ userinfo.gender }}
-                  </span>
-                  <span v-if="userinfo.address" style="width: 230px;margin-bottom: 10px">
-                    籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯&nbsp;:{{ userinfo.address }}
-                  </span>
-                  <span v-if="userinfo.workAge" style="width: 230px;margin-bottom: 10px">
-                    工&nbsp;作&nbsp;经&nbsp;验&nbsp;:{{ userinfo.workAge }}
+                  <span class="infoTle">
+                    姓名<span class="infoTxt"> : {{ userinfo.name }}</span>
                   </span>
 
-                  <span v-if="userinfo.phone" style="width: 230px;margin-bottom: 10px">
-                    电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话&nbsp;:{{ userinfo.phone }}
+                  <span class="infoTle">
+                    年龄<span class="infoTxt"> : {{ userinfo.age }}</span>
                   </span>
-                  <span v-if="userinfo.email" style="width: 230px;margin-bottom: 10px">
-                    邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;:{{ userinfo.email }}
+
+                  <span class="infoTle">
+                    性别<span class="infoTxt"> : {{userinfo.gender}}</span>
+                  </span>
+
+                  <span v-if="userinfo.address" class="infoTle">
+                    籍贯<span class="infoTxt"> : {{ userinfo.address }}</span>
+                  </span>
+
+                  <span v-if="userinfo.workAge" class="infoTle">
+                    工作经验<span class="infoTxt"> : {{ userinfo.workAge }}</span>
+                  </span>
+
+                  <span v-for="(info,idx) in userinfo.otherInfo" :key="idx" class="infoTle">
+                    {{info.label}}<span class="infoTxt">:{{ info.txt }}</span>
                   </span>
 
                 </div>
@@ -173,7 +174,7 @@
 </template>
 
 <script>
-import {useImgUrl, initInfo} from '@/hooks/useImgUrl'
+import {userInfoHandle, initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
@@ -201,7 +202,7 @@ export default defineComponent({
       baseInfo,
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
-      ...useImgUrl(),
+      ...userInfoHandle(),
     }
   }
 })
@@ -227,4 +228,18 @@ export default defineComponent({
   cursor: pointer;
 }
 
+#resume1 .infoTle {
+  width: 80px;
+  margin-bottom: 10px;
+  text-align-last: justify;
+  position: relative;
+  margin-right: 158px;
+}
+
+#resume1 .infoTxt {
+  position: absolute;
+  left: 90px;
+  width: 140px;
+  text-align-last: left;
+}
 </style>

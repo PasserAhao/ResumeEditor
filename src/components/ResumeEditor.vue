@@ -18,7 +18,7 @@
               <el-form-item v-for="(col,idx) in colors" :key="idx" :label="col.title">
                   <span v-for="(item,idx2) in col.color" :key="idx2">
                     <el-color-picker v-model="item.value" show-alpha :predefine="predefineColors"
-                    @change="saveInfo"/>
+                                     @change="saveInfo"/>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                   </span>
               </el-form-item>
@@ -38,7 +38,7 @@
             <h3 style="text-align: left">模块管理</h3>
             <!--添加自定义模块-->
             <div style="width: 100%;margin-bottom: 15px">
-              <el-button style="width: 310px;" type="success" @click="Dialog = true">添加自定义模块</el-button>
+              <el-button style="width: 310px;" type="success" @click="ModuleDialog = true">添加自定义模块</el-button>
             </div>
             <!--模块列表-->
             <el-table :data="ModuleList" style="width: 90%;margin-bottom: 100px">
@@ -72,44 +72,59 @@
           <!--基本信息-->
           <el-form style="height: calc(100vh - 60px);overflow-y: scroll">
             <h3>基本信息设置</h3>
-            <el-form-item label="你的姓名:">
+            <el-form-item label="你 的 姓 名:">
               <el-input v-model="userinfo.name"></el-input>
             </el-form-item>
 
-            <el-form-item label="性别:" style="margin-top: 15px">
-              <el-radio-group v-model="userinfo.gender" class="ml-4">
+            <el-form-item label="性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:" style="margin-top: 15px">
+              <el-radio-group v-model="userinfo.gender" class="ml-4" style="margin-left: 8px">
                 <el-radio label="男">男</el-radio>
                 <el-radio label="女">女</el-radio>
               </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="年龄:">
+            <el-form-item label="年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄:">
               <el-date-picker style="width: 150px" v-model="userinfo.date" @change="DateChange"
                               type="date" placeholder="出生日期" value-format="YYYY-MM-DD"/>
               <el-checkbox v-model="isShowD.date" style="margin-left: 15px" label="转数字" name="type"
                            @change="DateToNum"/>
             </el-form-item>
 
-            <el-form-item label="地址:" style="margin-top: 15px">
-              <el-input v-model="userinfo.address" style="width: 230px;"></el-input>
+            <el-form-item label="地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址:" style="margin-top: 15px">
+              <el-input v-model="userinfo.address" style="width: 180px;"></el-input>
               <el-checkbox v-model="isShowD.address" style="margin-left: 15px" name="type"
                            @change="isShowAddressHandle"/>
             </el-form-item>
 
-            <el-form-item label="工作年限:">
-              <el-select v-model="userinfo.workAge" class="m-2" placeholder="Select">
+            <el-form-item label="工 作 年 限:">
+              <el-select v-model="userinfo.workAge" class="m-2" placeholder="Select" style="margin-left: -6px">
                 <el-option v-for="item in workerAgeOption"
                            :key="item.value" :label="item.label" :value="item.value"/>
               </el-select>
             </el-form-item>
 
-            <el-form-item label="电话:" style="margin-top: 15px">
-              <el-input v-model="userinfo.phone"></el-input>
+            <el-form-item v-for="(info,idx) in userinfo.otherInfo" :key="idx" style="margin-top: 7px">
+              <div style="display: flex">
+                <span style="color: #606266;text-align: justify;width: 67px;max-width: 67px;text-align-last: justify">
+                  {{ info.label }}</span> :
+
+                <el-input v-model="info.txt" style="width: 170px;margin-left: 8px"/>
+
+                <div style="margin-left: 10px;position: relative;cursor: pointer" @click="InfoSort(info.idx,true)">
+                  <circle-double-up theme="two-tone" style="position: absolute;top: 6px"
+                                    size="22" :fill="['#7ed321' ,'#ffffff']"/>
+                </div>
+
+                <div style="margin-left: 30px;position: relative;cursor: pointer" @click="delInfo(info.idx)">
+                  <delete theme="two-tone" size="22"
+                          style="position: absolute;top: 5px" :fill="['#ee194b' ,'#ffffff']"/>
+                </div>
+              </div>
             </el-form-item>
 
-            <el-form-item label="邮箱:">
-              <el-input v-model="userinfo.email"></el-input>
-            </el-form-item>
+            <div style="width: 100%;margin-bottom: 15px">
+              <el-button style="width: 310px;" type="success" @click="InfoDialog = true">添加自定义信息</el-button>
+            </div>
 
             <h3>求职意向</h3>
 
@@ -308,7 +323,7 @@
                         :editor-id="item.editor_id"
                         v-model="item.content" :preview="false" :toolbars="tooBars"/>
               <!--标签处理-->
-              <div v-if="item.label">
+              <div v-if="module.showTag">
                 <!--添加标签-->
                 <div style="margin-top: 25px">
                   <el-input style="width: 215px;" v-model="item.labelName"/>
@@ -340,16 +355,56 @@
       </el-tab-pane>
 
     </el-tabs>
-    <el-dialog v-model="Dialog" title="添加模块" width="30%" align-center>
+    <!--  增加模块  -->
+    <el-dialog v-model="ModuleDialog" title="添加模块" width="30%" align-center>
       <el-form>
+
         <el-form-item label="模块名称">
-          <el-input v-model="moduleForm.moduleName"/>
+          <el-input v-model="moduleForm.moduleName" maxlength="4"/>
+        </el-form-item>
+
+        <el-form-item label="主标题">
+          <el-switch v-model="moduleTem.mainTle"/>
+        </el-form-item>
+
+        <el-form-item label="副标题">
+          <el-switch v-model="moduleTem.advbTle"/>
+        </el-form-item>
+
+        <el-form-item label="时间区间">
+          <el-switch v-model="moduleTem.hasDate"/>
+        </el-form-item>
+
+        <el-form-item label="是否添加标签">
+          <el-switch style="width: 10px" v-model="moduleForm.showTag"/>
+        </el-form-item>
+
+        <el-form-item label="是否允许添加子项">
+          <el-switch style="width: 10px" v-model="moduleForm.AllowChild"/>
+        </el-form-item>
+
+      </el-form>
+      <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="ModuleDialog = false">取消</el-button>
+            <el-button type="primary" @click="AddModules">确定</el-button>
+          </span>
+      </template>
+    </el-dialog>
+    <!--  增加信息  -->
+    <el-dialog v-model="InfoDialog" title="添加个人信息" width="30%" align-center>
+      <el-form>
+        <el-form-item label="信 息 label :">
+          <el-input v-model="InfoModule.label" maxlength="4"/>
+        </el-form-item>
+        <el-form-item label="信 息 内 容 :">
+          <el-input v-model="InfoModule.txt"/>
         </el-form-item>
       </el-form>
       <template #footer>
           <span class="dialog-footer">
-            <el-button @click="moduleDialog = false">取消</el-button>
-            <el-button type="primary" @click="AddModules">确定</el-button>
+            <el-button @click="InfoDialog = false">取消</el-button>
+            <el-button type="primary" @click="AddInfo">确定</el-button>
           </span>
       </template>
     </el-dialog>
@@ -402,7 +457,8 @@ export default defineComponent({
 
   },
   setup(props) {
-    const Dialog = ref(false)
+    const ModuleDialog = ref(false)
+    const InfoDialog = ref(false)
     const tooBars = reactive([
       'bold',
       'underline',
@@ -511,6 +567,7 @@ export default defineComponent({
         isTem: false,
         isAdd: false,
         AllowChild: false,
+        showTag:false,
         text1: '',
         text2: '',
         text3: '',
@@ -519,6 +576,8 @@ export default defineComponent({
           id: 0,
           title: {text1: "", text2: "", date1: "", date2: "", education: ''},
           content: "",
+          labelName: '',
+          label: []
         },
         moduleContent: {
           isShow: true, moduleName: '', headerImg: 'star', content: [
@@ -527,25 +586,65 @@ export default defineComponent({
               editor_id: '',
               title: {text1: "", text2: "", date1: "", date2: "", education: ''},
               content: "",
+              labelName: '',
+              label: []
             },
           ]
         }
       })
+      const moduleTem = reactive({
+        mainTle:false,
+        advbTle:false,
+        hasDate:false,
+      })
       // 添加自定义模块
       const AddModules = () => {
         const isAdd = ref(true)
-        ModuleConfig.forEach((item) => {
-          if (item.moduleName === moduleForm.moduleName) {
-            ElMessage.warning("模块已经存在，请勿重复添加")
-            isAdd.value = false
+        if (moduleForm.moduleName.length > 0) {
+          ModuleConfig.forEach((item) => {
+            if (item.moduleName === moduleForm.moduleName) {
+              ElMessage.warning("模块已经存在，请勿重复添加")
+              isAdd.value = false
+            }
+          })
+          if (isAdd.value) {
+            moduleForm.moduleContent.moduleName = moduleForm.moduleName
+            moduleForm.moduleContent.content[0].editor_id = `${moduleForm.moduleName}1`
+            if (moduleTem.mainTle){
+              moduleForm.text1 = "主标题"
+            }
+            if (moduleTem.advbTle){
+              moduleForm.text2 = "副标题"
+            }
+            if (moduleTem.hasDate){
+              moduleForm.text3 = "时间区间"
+            }
+
+            ModuleConfig.push(JSON.parse(JSON.stringify(moduleForm)))
+            ModuleDialog.value = false
           }
-        })
-        if (isAdd.value) {
-          moduleForm.moduleContent.moduleName = moduleForm.moduleName
-          moduleForm.moduleContent.content[0].editor_id = `${moduleForm.moduleName}1`
-          ModuleConfig.push(JSON.parse(JSON.stringify(moduleForm)))
-          Dialog.value = false
+        } else {
+          ElMessage.warning("模块名字不能为空哦!!!")
         }
+
+        saveInfo()
+      }
+      // 删除自定义模块
+      const delModel = (name) => {
+        for (let i = 0; i < ModuleConfig.length; i++) {
+          const moduleName = ModuleConfig[i].moduleName
+          if (moduleName === name) {
+            ModuleConfig.splice(i, 1)
+          }
+        }
+
+        for (let i = 0; i < ModuleList.length; i++) {
+          const moduleName = ModuleList[i].moduleName
+          if (moduleName === name) {
+            ModuleList.splice(i, 1)
+          }
+        }
+
         saveInfo()
       }
       // 模块上移(MdList)
@@ -565,8 +664,8 @@ export default defineComponent({
       }
 
       return {
-        ModuleConfig, moduleForm, ModuleList,
-        isAddModule, AddModules, ModuleSort,
+        ModuleConfig, moduleForm, ModuleList, moduleTem,
+        isAddModule, AddModules, ModuleSort, delModel,
         AddChild, EditChild, EditTags,
       }
     }
@@ -581,6 +680,50 @@ export default defineComponent({
       if (isShowD_local) {
         for (let key in isShowD_local) {
           isShowD[key] = isShowD_local[key]
+        }
+      }
+
+
+      const InfoModule = reactive({
+        idx: "",
+        label: "",
+        txt: "",
+      })
+      // 信息排序
+      const InfoSort = (value, isUp) => {
+        userinfo.otherInfo.forEach((item, index) => {
+          if (value === item.idx) {
+            if (isUp) {
+              if (index !== 0) {
+                userinfo.otherInfo[index] = userinfo.otherInfo.splice(index - 1, 1, userinfo.otherInfo[index])[0]
+              } else {
+                userinfo.otherInfo.push(userinfo.otherInfo.shift())
+              }
+            }
+          }
+        })
+        saveInfo()
+      }
+      // 删除信息
+      const delInfo = (value) => {
+        for (let i = 0; i < userinfo.otherInfo.length; i++) {
+          const idx = userinfo.otherInfo[i].idx
+          if (value === idx) {
+            userinfo.otherInfo.splice(i, 1)
+          }
+        }
+        saveInfo()
+      }
+      // 添加信息
+      const AddInfo = () => {
+        InfoModule["idx"] = userinfo.otherInfo.length + 1
+        if (InfoModule.label.length === 0) {
+          ElMessage.warning("label不能为空")
+        } else if (InfoModule.label.length > 4) {
+          ElMessage.warning("label不能超过四个字符哦!!!")
+        } else {
+          userinfo.otherInfo.push(JSON.parse(JSON.stringify(InfoModule)))
+          InfoDialog.value = false
         }
       }
 
@@ -610,8 +753,13 @@ export default defineComponent({
         work3: {index: 4, isShow: false, title: "到 岗 时 间", content: "随时到岗位"},
       })
 
-      // 用户基本信息
-      userinfo.job = [JobIntention.work0, JobIntention.work1, JobIntention.work2, JobIntention.work3]
+      // 跟新job内容
+      if (userinfo.job) {
+        for (let info of userinfo.job) {
+          JobIntention[`work${info.index - 1}`] = info
+        }
+      }
+
 
       // 选择日期后立马复制给需要展示的值
       const DateChange = (value) => {
@@ -669,8 +817,8 @@ export default defineComponent({
       }
 
       return {
-        userinfo, workerAgeOption, isShowD, JobIntention,
-        DateToNum, DateChange, isShowAddressHandle,
+        userinfo, workerAgeOption, isShowD, JobIntention, InfoModule,
+        DateToNum, DateChange, isShowAddressHandle, InfoSort, delInfo, AddInfo,
         jobIntentionHandle1, jobIntentionHandle2, jobIntentionHandle3, jobIntentionHandle4,
       }
     }
@@ -754,27 +902,11 @@ export default defineComponent({
       const id = props.temId
       localStorage.setItem(`${id}_color`, JSON.stringify(color))
     }
-    // 删除自定义模块
-    const delModel = (name) => {
-      for (let i = 0; i < ModuleConfig.length; i++) {
-        const moduleName = ModuleConfig[i].moduleName
-        if (moduleName === name) {
-          ModuleConfig.splice(i, 1)
-        }
-      }
 
-      for (let i = 0; i < ModuleList.length; i++) {
-        const moduleName = ModuleConfig[i].moduleName
-        if (moduleName === name) {
-          ModuleList.splice(i, 1)
-        }
-      }
-
-      saveInfo()
-    }
 
     return {
-      Dialog, tooBars, predefineColors, saveInfo, delModel,
+      ModuleDialog, InfoDialog, tooBars, predefineColors,
+      saveInfo,
       ...resumeConfig(), ...baseInfo(), ...skill(),
     }
   }

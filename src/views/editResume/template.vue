@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {useImgUrl, initInfo} from '@/hooks/useImgUrl'
+import {userInfoHandle, initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive,} from "vue";
 // import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../components/ResumeEditor'
@@ -42,7 +42,7 @@ export default defineComponent({
     return {
       colorsConfig,
       ...initInfo(),
-      ...useImgUrl(),
+      ...userInfoHandle(),
     }
   }
 })

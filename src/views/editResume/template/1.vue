@@ -9,7 +9,7 @@
         <!--   头像部分         -->
         <!--   头像部分         -->
         <div style="margin-bottom: 10px;position: relative">
-          <el-image style="background: #f5f7fa;width: 124px;min-height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
+          <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 25px 0 0 55px" :src="imgUrl">
             <template #error>
               <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
             </template>
@@ -50,21 +50,18 @@
                   </span>
             <span>&nbsp;&nbsp;{{ userinfo.workAge }}</span>
           </div>
-          <!--    电话     -->
-          <div style="margin-top: 15px">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <phone-call theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
-                  </span>
-            <span>&nbsp;&nbsp;{{ userinfo.phone }}</span>
-          </div>
-          <!--    邮箱     -->
-          <div style="margin-top: 15px;">
-                  <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <mail-open theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
-                  </span>
-            <span>&nbsp;&nbsp;{{ userinfo.email }}</span>
-          </div>
 
+          <div v-for="(info,idx) in userinfo.otherInfo" :key="idx">
+            <div style="margin-top: 15px">
+              <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
+                <phone-call v-if="info.label === '电话'" theme="two-tone" size="18"
+                            :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                <mail-open v-else-if="info.label === '邮箱'" theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                <star v-else theme="outline" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+              </span>
+              <span>&nbsp;&nbsp;{{ info.txt }}</span>
+            </div>
+          </div>
 
         </div>
         <!--      自定义信息        -->
@@ -197,7 +194,7 @@
 </template>
 
 <script>
-import {useImgUrl, initInfo} from '@/hooks/useImgUrl'
+import {userInfoHandle, initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, onMounted, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
@@ -240,7 +237,7 @@ export default defineComponent({
       resume, resumeHeight,
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
-      ...useImgUrl(),
+      ...userInfoHandle(),
     }
   }
 })

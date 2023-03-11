@@ -5,9 +5,6 @@
       <div style="font-size: 20px;font-weight: bold;width: 80%;margin: 0 auto">
         <p style="margin: 0;padding-top: 50px">
           <span style="color: red">注意:</span>
-          刷新出现白屏后重新进入就好了，原来的数据会自动保存
-        </p>
-        <p>
           简历在线生成pdf项目为小张同志原创（切勿商用），欢迎大家讨论学习。联系WX:Hao3688688 (备注来意，否则不通过)
         </p>
         <p>
