@@ -747,10 +747,10 @@ export default defineComponent({
         {value: '30年以上工作经验', label: '30年以上工作经验',},
       ])
       const JobIntention = reactive({
-        work0: {index: 1, isShow: false, title: "求 职 意 向", content: "厨师"},
-        work1: {index: 2, isShow: false, title: "意 向 城 市", content: "比奇堡"},
-        work2: {index: 3, isShow: false, title: "期 望 薪 资", content: "10W"},
-        work3: {index: 4, isShow: false, title: "到 岗 时 间", content: "随时到岗位"},
+        work0: {index: 1, isShow: false, title: "求职意向", content: "厨师"},
+        work1: {index: 2, isShow: false, title: "意向城市", content: "比奇堡"},
+        work2: {index: 3, isShow: false, title: "期望薪资", content: "10W"},
+        work3: {index: 4, isShow: false, title: "到岗时间", content: "随时到岗位"},
       })
 
       // 跟新job内容
@@ -804,16 +804,16 @@ export default defineComponent({
         localStorage.setItem('userinfo', JSON.stringify(isShowD))
       }
       const jobIntentionHandle1 = (value) => {
-        jobHandle(value, 0, "求 职 意 向")
+        jobHandle(value, 0, "求职意向")
       }
       const jobIntentionHandle2 = (value) => {
-        jobHandle(value, 1, "意 向 城 市")
+        jobHandle(value, 1, "意向城市")
       }
       const jobIntentionHandle3 = (value) => {
-        jobHandle(value, 2, "期 望 薪 资")
+        jobHandle(value, 2, "期望薪资")
       }
       const jobIntentionHandle4 = (value) => {
-        jobHandle(value, 3, "到 岗 时 间")
+        jobHandle(value, 3, "到岗时间")
       }
 
       return {

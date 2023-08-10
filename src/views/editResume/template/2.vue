@@ -4,10 +4,10 @@
       <!--    头部内容        -->
       <div style="display: flex" :style="{color:colorsConfig[0].color[0].value}">
         <div style="margin-left: 30px;margin-top: 20px">
-                <span style="font-size: 35px;padding: 3px 20px 3px 0;"
-                      :style="{borderRight:`${colorsConfig[0].color[0].value} solid 3px`}">
-                  {{ baseInfo[0].text }}
-                </span>
+          <span style="font-size: 35px;padding: 3px 20px 3px 0;"
+                :style="{borderRight:`${colorsConfig[0].color[0].value} solid 3px`}">
+            {{ baseInfo[0].text }}
+          </span>
         </div>
         <div style="margin-left: 15px">
           <p style="font-size: 18px;margin-bottom: 3px">{{ baseInfo[1].text }}</p>
@@ -54,7 +54,8 @@
           <div style="margin-top: -4px;overflow: hidden"
                :style="{borderLeft:`${colorsConfig[0].color[0].value} solid 2px`,borderTop:`${colorsConfig[0].color[0].value} solid 2px`}">
             <div style="overflow: hidden">
-              <div style="float: left;min-height: 160px;width: 478px;margin: 15px 0 0 40px">
+
+              <div style="float: left;min-height: 140px;width: 478px;margin: 15px 0 0 40px">
                 <div style="display: flex;flex-wrap: wrap">
                   <span class="infoTle">
                     姓名<span class="infoTxt"> : {{ userinfo.name }}</span>
@@ -82,18 +83,19 @@
 
                 </div>
                 <div style="display: flex;flex-wrap: wrap">
-                  <span v-for="(item,idx) in userinfo.job" :key="idx" style="width: 230px;margin-bottom: 10px">
-                    <span v-if="item.isShow">
-                      {{ item.title }} : {{ item.content }}
+                  <span v-for="(item,idx) in userinfo.job" :key="idx" class="infoTle">
+                    {{ item.title }}
+                    <span v-if="item.isShow" class="infoTxt">
+                       : {{ item.content }}
                     </span>
                   </span>
                 </div>
               </div>
 
               <!--       头像             -->
-              <div style="float: right;min-height: 160px;width: 200px">
+              <div style="float: right;min-height: 140px;width: 200px">
                 <div style="margin-bottom: 10px;position: relative">
-                  <el-image style="background: #f5f7fa;width: 124px;height: 154px;margin: 15px 0 0 55px"
+                  <el-image style="background: #f5f7fa;width: 115px;height: 140px;margin: 15px 0 0 55px"
                             :src="imgUrl">
                     <template #error>
                       <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
@@ -210,8 +212,8 @@ export default defineComponent({
 <style scoped>
 
 #resume1 .hidden_img {
-  width: 124px;
-  height: 154px;
+  width: 115px;
+  height: 140px;
   position: absolute;
   top: 15px;
   left: 55px;
