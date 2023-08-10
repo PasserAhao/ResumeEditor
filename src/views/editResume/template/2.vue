@@ -142,7 +142,9 @@
               <!--       自定义模块content           -->
               <div>
                 <MdEditor :style="{color:colorsConfig[1].color[2].value}"
-                          :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"/>
+                          :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"
+                          class="My-md-editor"
+                />
               </div>
               <!--       自定义模块Tag           -->
               <!--       自定义模块Tag           -->
@@ -243,4 +245,5 @@ export default defineComponent({
   width: 140px;
   text-align-last: left;
 }
+
 </style>
