@@ -9,7 +9,7 @@
 module.exports = {
   outputDir:'./Editor',
   publicPath: process.env.NODE_ENV === 'production'
-      ? '/my-project/'
+      ? '/Editor/'
       : '/'
 }
 
