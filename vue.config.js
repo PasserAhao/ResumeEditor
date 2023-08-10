@@ -1,9 +1,15 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
-  // outputDir:'./dist/resume',
-  // publicPath:'/EditResume/',
+// const { defineConfig } = require('@vue/cli-service')
+// module.exports = defineConfig({
+//   // transpileDependencies: true,
+//   // outputDir:'./dist/resume',
+//   // publicPath:'/EditResume/',
+// })
+
+// 用于github pages
+module.exports = {
   outputDir:'./Editor',
-  publicPath:'./'
-})
+  publicPath: process.env.NODE_ENV === 'production'
+      ? '/ResumeEditor/Editor/'
+      : '/'
+}
 
