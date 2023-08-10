@@ -3,6 +3,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
   // outputDir:'./dist/resume',
   // publicPath:'/EditResume/',
-  publicPath:'/'
+  outputDir:'./Editor',
+  publicPath:'./'
 })
 
