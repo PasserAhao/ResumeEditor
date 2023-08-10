@@ -10,7 +10,7 @@
 
   <div style="background: #cccdd3;height: calc(100vh - 60px);position: relative">
     <!--      左边简历区域部分    -->
-    <div style="overflow-y: scroll;height: calc(100vh - 60px);width: 70vw;">
+    <div id="myResume-index" style="overflow-y: scroll;height: calc(100vh - 60px);width: 70vw;">
       <div style="margin: 30px 0;">
         <router-view/>
       </div>
@@ -41,4 +41,5 @@ export default defineComponent({
   float: right;
   margin-top: 12px;
 }
+
 </style>
