@@ -5,6 +5,6 @@ module.exports = defineConfig({
   // publicPath:'/EditResume/',
   outputDir:'./Editor',
   publicPath:'./',
-  assetsDir:'./'
+  // assetsDir:'./'
 })
 
