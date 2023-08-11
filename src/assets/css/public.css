@@ -18,7 +18,19 @@
     font-weight: bold;
 }
 
-.el-switch__core{
-    width: 60px!important;
+.el-switch__core {
+    width: 60px !important;
 }
 
+.public-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.public-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}

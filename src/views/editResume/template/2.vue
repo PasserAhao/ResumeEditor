@@ -111,54 +111,55 @@
         </div>
         <!--   循环部分   -->
         <div v-for="(module,idx) in ModuleList" :key="idx">
-          <!--     标题部分           -->
-          <div style="height: 24px;position: relative">
+          <div v-if="module.isShow">
+            <!--     标题部分           -->
+            <div style="height: 24px;position: relative">
                   <span style="padding: 0 10px 0 27px;margin-left: -17px;font-size: 16px"
                         :style="{background:colorsConfig[0].color[0].value,color:colorsConfig[1].color[0].value}">{{
                       module.moduleName
                     }}</span>
-            <span style="position: absolute;width: 20px;height: 20px;clip-path: polygon(0 0, 0% 100%, 100% 100%)"
-                  :style="{background:colorsConfig[0].color[0].value}"/>
-            <span
-                style="position: absolute;height: 6px;width: 17px;top: 20px;left: -17px;clip-path: polygon(0 0, 100% 0, 100% 100%)"
-                :style="{background:'rgba(0,0,0,0.5)'}"/>
+              <span style="position: absolute;width: 20px;height: 20px;clip-path: polygon(0 0, 0% 100%, 100% 100%)"
+                    :style="{background:colorsConfig[0].color[0].value}"/>
+              <span
+                  style="position: absolute;height: 6px;width: 17px;top: 20px;left: -17px;clip-path: polygon(0 0, 100% 0, 100% 100%)"
+                  :style="{background:'rgba(0,0,0,0.5)'}"/>
 
-          </div>
-          <!--     内容部分          -->
-          <div style="margin-top: -4px"
-               :style="{borderLeft:`${colorsConfig[0].color[0].value} solid 2px`,borderTop:`${colorsConfig[0].color[0].value} solid 2px`}">
-            <div v-for="(con,index2) in module.content" :key="index2"
-                 :style="{color:colorsConfig[1].color[1].value}" style="width: 670px;margin: 0 auto;margin-top: 10px">
-              <!--       自定义模块Title           -->
-              <!--       自定义模块Title           -->
-              <div v-if="con.title"
-                   style="display: flex;justify-content: space-between;width: 100%;font-size: 16px;">
-                <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
-                <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
-                <div v-if="con.title.text2">{{ con.title.text2 }}</div>
-                <div v-if="con.title.education">{{ con.title.education }}</div>
-              </div>
-              <!--       自定义模块content           -->
-              <!--       自定义模块content           -->
-              <div>
-                <MdEditor :style="{color:colorsConfig[1].color[2].value}"
-                          :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"
-                          class="My-md-editor"
-                />
-              </div>
-              <!--       自定义模块Tag           -->
-              <!--       自定义模块Tag           -->
-              <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
-                <div v-for="(tag,index3) in con.label" :key="index3" style="margin-bottom: 15px">
-                  <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
-                       :style="{background:colorsConfig[2].color[1].value,border:`2px solid ${colorsConfig[2].color[0].value}`}">
+            </div>
+            <!--     内容部分          -->
+            <div style="margin-top: -4px"
+                 :style="{borderLeft:`${colorsConfig[0].color[0].value} solid 2px`,borderTop:`${colorsConfig[0].color[0].value} solid 2px`}">
+              <div v-for="(con,index2) in module.content" :key="index2"
+                   :style="{color:colorsConfig[1].color[1].value}" style="width: 670px;margin: 0 auto;margin-top: 10px">
+                <!--       自定义模块Title           -->
+                <!--       自定义模块Title           -->
+                <div v-if="con.title" class="control-Title">
+                  <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
+                  <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
+                  <div v-if="con.title.text2">{{ con.title.text2 }}</div>
+                  <div v-if="con.title.education">{{ con.title.education }}</div>
+                </div>
+                <!--       自定义模块content           -->
+                <!--       自定义模块content           -->
+                <div>
+                  <MdEditor :style="{color:colorsConfig[1].color[2].value}"
+                            :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"
+                            class="My-md-editor"
+                  />
+                </div>
+                <!--       自定义模块Tag           -->
+                <!--       自定义模块Tag           -->
+                <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
+                  <div v-for="(tag,index3) in con.label" :key="index3" style="margin-bottom: 15px">
+                    <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
+                         :style="{background:colorsConfig[2].color[1].value,border:`2px solid ${colorsConfig[2].color[0].value}`}">
                     <span style="padding: 10px;line-height: 28px" :style="{color:colorsConfig[1].color[2].value}">
                       {{ tag }}
                     </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
