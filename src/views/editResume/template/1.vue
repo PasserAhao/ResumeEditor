@@ -1,43 +1,43 @@
 <template>
   <div id="resume1">
-    <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden">
+    <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden"
+         :style="{background:`linear-gradient(to right, ${colorsConfig[2].color[0].value} 240px, white 240px)`}">
       <!--   简历左边部分     -->
       <!--   简历左边部分     -->
       <!--   简历左边部分     -->
-      <div style="width: 240px;float: left;position: relative;"
-           :style="{background:colorsConfig[0].color[0].value,height:resumeHeight}">
+      <div style="width: 240px;float: left;position: relative;">
         <!--   头像部分         -->
         <!--   头像部分         -->
         <AvatarTem width="124" height="154"/>
         <!--     基础信息       -->
         <!--     基础信息       -->
         <div style="display: flex;flex-direction: column;margin: 15px 0 0 20px"
-             :style="{color:colorsConfig[1].color[0].value}">
+             :style="{color:colorsConfig[3].color[0].value}">
           <!--    年龄    -->
           <div style="margin-top: 15px">
                   <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <calendar theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                    <calendar theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
                   </span>
             <span>&nbsp;&nbsp;{{ userinfo.age }}</span>
           </div>
           <!--    性别     -->
           <div style="margin-top: 15px">
                   <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <male theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                    <male theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
                   </span>
             <span>&nbsp;&nbsp;{{ userinfo.gender }}</span>
           </div>
           <!--    地址     -->
           <div v-if="userinfo.address" style="margin-top: 15px">
                   <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <local theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                    <local theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
                   </span>
             <span>&nbsp;&nbsp;{{ userinfo.address }}</span>
           </div>
           <!--    工作年限     -->
           <div v-if="userinfo.workAge" style="margin-top: 15px">
                   <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
-                    <web-page theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                    <web-page theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
                   </span>
             <span>&nbsp;&nbsp;{{ userinfo.workAge }}</span>
           </div>
@@ -46,9 +46,9 @@
             <div style="margin-top: 15px">
               <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
                 <phone-call v-if="info.label === '电话'" theme="two-tone" size="18"
-                            :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
-                <mail-open v-else-if="info.label === '邮箱'" theme="two-tone" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
-                <star v-else theme="outline" size="18" :fill="[colorsConfig[0].color[0].value ,'#ffffff']"/>
+                            :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
+                <mail-open v-else-if="info.label === '邮箱'" theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
+                <star v-else theme="outline" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
               </span>
               <span>&nbsp;&nbsp;{{ info.txt }}</span>
             </div>
@@ -58,7 +58,7 @@
         <!--      自定义信息        -->
         <!--      自定义信息        -->
         <div v-show="skillInfo.text" style="margin:50px 20px;font-size: 22px">
-          <MdEditor :style="{color:colorsConfig[1].color[0].value,background:colorsConfig[0].color[0].value}"
+          <MdEditor :style="{color:colorsConfig[3].color[0].value,background:colorsConfig[2].color[0].value}"
                     :editor-id="'skill'" :previewOnly="true" v-model="skillInfo.text"/>
         </div>
         <!--      技能特长        -->
@@ -95,9 +95,9 @@
       <!--    简历右边部分    -->
       <!--    简历右边部分    -->
       <!--    简历右边部分    -->
-      <div id="ContentBody" style="float: left;width: 580px;min-height: 1160px;" ref="resume">
+      <div id="ContentBody" style="float: left;width: 580px;background: white">
         <!--      求职意向        -->
-        <div :style="{color: colorsConfig[2].color[0].value}">
+        <div :style="{color: colorsConfig[0].color[0].value}">
           <h1 style="margin: 0 0 15px 30px;padding-top: 10px">{{ userinfo.name }}</h1>
           <div style="display: flex;flex-direction: row;justify-content: flex-start;flex-wrap: wrap">
             <div v-for="(item,index) in userinfo.job" :key="index"
@@ -114,7 +114,7 @@
               <!--      自定义模块头部            -->
               <div style="display: flex;justify-content: flex-start;width: 550px;margin: 3px auto 5px">
                 <div style="border-radius: 50px;padding: 7px 7px 5px 7px"
-                     :style="{background: colorsConfig[2].color[0].value}">
+                     :style="{background: colorsConfig[0].color[0].value}">
                   <book-open v-if="item.headerImg === 'bookOpen'" theme="outline" size="20" fill="#ffffff"/>
                   <handbag v-if="item.headerImg === 'handbag1'" theme="outline" size="20" fill="#ffffff"/>
                   <seo-folder v-if="item.headerImg === 'folder'" theme="outline" size="20" fill="#ffffff"/>
@@ -126,44 +126,15 @@
                   <star v-if="item.headerImg === 'star'" theme="outline" size="20" fill="#ffffff"/>
                 </div>
                 <div
-                    :style="{marginLeft: '15px',width: '495px',borderBottom:`${colorsConfig[2].color[0].value} solid 2px`}">
+                    :style="{marginLeft: '15px',width: '495px',borderBottom:`${colorsConfig[0].color[0].value} solid 2px`}">
                         <span style="font-size: 16px;font-weight: bold;"
-                              :style="{color:colorsConfig[2].color[0].value}">
+                              :style="{color:colorsConfig[0].color[0].value}">
                           {{ item.moduleName }}
                         </span>
                 </div>
               </div>
               <!--      自定义模块内容           -->
-              <div v-for="(con,index2) in item.content" :key="index2"
-                   :style="{color:colorsConfig[2].color[0].value}" style="width: 520px;margin: 0 auto;">
-                <!--       自定义模块Title           -->
-                <!--       自定义模块Title           -->
-                <div v-if="con.title" class="control-Title">
-                  <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
-                  <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
-                  <div v-if="con.title.text2">{{ con.title.text2 }}</div>
-                  <div v-if="con.title.education">{{ con.title.education }}</div>
-                </div>
-                <!--       自定义模块content           -->
-                <!--       自定义模块content           -->
-                <div>
-                  <MdEditor :style="{color:colorsConfig[2].color[1].value}"
-                            :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"/>
-                </div>
-                <!--       自定义模块Tag           -->
-                <!--       自定义模块Tag           -->
-                <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
-                  <div v-for="(tag,index3) in con.label" :key="index3">
-                    <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
-                         :style="{background:colorsConfig[3].color[1].value,border:`2px solid ${colorsConfig[3].color[0].value}`}">
-                            <span style="padding: 10px;line-height: 28px" :style="{color:colorsConfig[2].color[1].value}">
-                              {{ tag }}
-                            </span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+              <ModuleContent1 :colors-config="colorsConfig" :module-content="item.content"/>
             </div>
 
           </div>
@@ -175,17 +146,18 @@
   </div>
   <!--      右边操作栏部分    -->
   <!--      右边操作栏部分    -->
-  <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig"
-                :colors="colorsConfig" :skill="skillInfo"/>
+  <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig" :colors="colorsConfig"
+                :skill="skillInfo"/>
 
 </template>
 
 <script>
 import {initInfo} from '@/hooks/UserInfoHandle'
-import {defineComponent, onMounted, reactive, ref} from "vue";
+import {defineComponent, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
 import AvatarTem from '../../../components/AvatarTem'
+import ModuleContent1 from '../../../components/ModuleContent1'
 
 import {
   Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag,
@@ -197,32 +169,19 @@ export default defineComponent({
   name: "1",
   components: {
     Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag, Comment,
-    Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne, MdEditor, ResumeEditor, AvatarTem
+    Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne,
+    MdEditor, ResumeEditor, AvatarTem,ModuleContent1
   },
   setup() {
     const temID = ref("tem1")
     const colorsConfig = reactive([
-      {title: '皮肤颜色', color: [{value: 'rgba(255,215,0,1)'}]},
-      {title: '字体颜色(左)', color: [{value: 'rgba(255,255,255,1)'}]},
-      {title: '字体颜色(右)', color: [{value: 'rgba(0,206,209,1)'}, {value: 'rgba(85,85,85,0.8)'}]},
-      {title: '标签颜色', color: [{value: 'rgba(58,95,133,0.2)'}, {value: 'rgba(255,215,219,1)'}]},
+      {title: '模块字体颜色', color: [{value: '#00CED1FF'}, {value: '#00CED1FF'},{value: '#555555CC'},]},
+      {title: '模块标签颜色', color: [{value: '#3A5F8533'}, {value: '#FFD7DBFF'}]},
+      {title: '皮肤颜色', color: [{value: '#FFD700FF'}]},
+      {title: '左侧字体颜色', color: [{value: '#FFFFFFFF'}]},
     ])
 
-    const resume = ref(null)
-    const resumeHeight = ref(`1160px`)
-    onMounted(()=>{
-      window.addEventListener("click",()=>{
-        const pageHeight = resume.value.offsetHeight
-        if (pageHeight > 1160){
-          resumeHeight.value = `${Math.ceil(pageHeight / 1160)*1160}px`
-        }else {
-          resumeHeight.value = `1160px`
-        }
-      })
-    })
-
     return {
-      resume, resumeHeight,
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
     }

@@ -356,6 +356,11 @@
 
     </el-tabs>
     <!--  增加模块  -->
+    <!--  增加模块  -->
+    <!--  增加模块  -->
+    <!--  增加模块  -->
+    <!--  增加模块  -->
+    <!--  增加模块  -->
     <el-dialog v-model="ModuleDialog" title="添加模块" width="30%" align-center>
       <el-form>
 
@@ -444,7 +449,7 @@ export default defineComponent({
 
     showSkill: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     skill: { //用户的技能爱好
       type: Object,
@@ -461,15 +466,19 @@ export default defineComponent({
     const InfoDialog = ref(false)
     const tooBars = reactive([
       'bold',
-      'underline',
-      'italic',
-      'codeRow',
-      'quote',
-      '-',
-      'unorderedList',
-      'orderedList',
-      'sup',
+      'title',
       'sub',
+      'sup',
+      'unorderedList',
+      'task',
+      '-',
+      'table',
+      'mermaid',
+      'pageFullscreen',
+      '=',
+      'preview',
+      'htmlPreview',
+      'catalog',
     ])
     const predefineColors = ref([
       '#ff4500',
@@ -479,7 +488,9 @@ export default defineComponent({
       '#00ced1',
       '#1e90ff',
       '#c71585',
-      'rgba(255,215,219,1)'
+      '#FFD7DBFF',
+      '#FFFFFF',
+      '#555555CC',
     ])
 
     //简历配置
@@ -567,7 +578,7 @@ export default defineComponent({
         isTem: false,
         isAdd: false,
         AllowChild: false,
-        showTag:false,
+        showTag: false,
         text1: '',
         text2: '',
         text3: '',
@@ -593,9 +604,9 @@ export default defineComponent({
         }
       })
       const moduleTem = reactive({
-        mainTle:false,
-        advbTle:false,
-        hasDate:false,
+        mainTle: false,
+        advbTle: false,
+        hasDate: false,
       })
       // 添加自定义模块
       const AddModules = () => {
@@ -610,13 +621,13 @@ export default defineComponent({
           if (isAdd.value) {
             moduleForm.moduleContent.moduleName = moduleForm.moduleName
             moduleForm.moduleContent.content[0].editor_id = `${moduleForm.moduleName}1`
-            if (moduleTem.mainTle){
+            if (moduleTem.mainTle) {
               moduleForm.text1 = "主标题"
             }
-            if (moduleTem.advbTle){
+            if (moduleTem.advbTle) {
               moduleForm.text2 = "副标题"
             }
-            if (moduleTem.hasDate){
+            if (moduleTem.hasDate) {
               moduleForm.text3 = "时间区间"
             }
 
@@ -838,7 +849,10 @@ export default defineComponent({
         {value: 100, label: "精通"},
       ])
 
-      const isShowSkill = props.showSkill
+      let isShowSkill = props.showSkill
+      if (skillInfo){
+        isShowSkill = true
+      }
 
       const AddSkill = (data, isSkill) => {
         if (isSkill) {
@@ -882,6 +896,7 @@ export default defineComponent({
         AddSkill, DelSkill,
       }
     }
+
 
     // 通用方法
     // 把数据保存到本地缓存

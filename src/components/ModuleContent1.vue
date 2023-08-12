@@ -1,9 +1,7 @@
 <template>
 <div>
-  <div :style="{color:colorsConfig[2].color[0].value}">asdasdasd</div>
-
-  <div v-for="(con,index2) in ModuleContent1" :key="index2"
-       :style="{color:colorsConfig[2].color[0].value}" style="width: 520px;margin: 0 auto;">
+  <div v-for="(con,index2) in moduleContent" :key="index2"
+       :style="{color:colorsConfig[0].color[1].value}" style="width: 520px;margin: 0 auto;">
     <!--       自定义模块Title           -->
     <!--       自定义模块Title           -->
     <div v-if="con.title" class="control-Title">
@@ -15,7 +13,7 @@
     <!--       自定义模块content           -->
     <!--       自定义模块content           -->
     <div>
-      <MdEditor :style="{color:colorsConfig[2].color[1].value}"
+      <MdEditor :style="{color:colorsConfig[0].color[2].value}"
                 :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"/>
     </div>
     <!--       自定义模块Tag           -->
@@ -23,11 +21,11 @@
     <div v-if="con.label" style="display: flex;justify-content: flex-start;flex-wrap: wrap">
       <div v-for="(tag,index3) in con.label" :key="index3">
         <div style="border-radius: 25px;margin-right: 10px;display: block;height: 30px"
-             :style="{background:colorsConfig[3].color[1].value,border:`2px solid ${colorsConfig[3].color[0].value}`}">
-                            <span style="padding: 10px;line-height: 28px"
-                                  :style="{color:colorsConfig[2].color[1].value}">
-                              {{ tag }}
-                            </span>
+             :style="{background:colorsConfig[1].color[1].value,border:`2px solid ${colorsConfig[1].color[0].value}`}">
+                <span style="padding: 10px;line-height: 28px"
+                      :style="{color:colorsConfig[0].color[2].value}">
+                  {{ tag }}
+                </span>
         </div>
       </div>
     </div>
@@ -40,19 +38,14 @@
 import {defineComponent} from "vue";
 import MdEditor from 'md-editor-v3'
 export default defineComponent({
-  name: "ModuleContent",
+  name: "ModuleContent1",
   components:{MdEditor},
   props :{
     colorsConfig:Array,
-    ModuleContent:Array
+    moduleContent:Array
   },
-  setup(props){
-    console.log(props.ModuleContent)
-    console.log(props.colorsConfig)
-    // eslint-disable-next-line vue/no-setup-props-destructure
-    const ModuleContent1 = props.ModuleContent
+  setup(){
     return {
-      ModuleContent1
     }
   }
 })

@@ -44,7 +44,7 @@ export default createStore({
       {
         index:1,
         isTem:true,
-        moduleName: "专业技能",
+        moduleName: "个人能力",
         isAdd: false,
         AllowChild: false,
         showTag:false,
@@ -57,10 +57,10 @@ export default createStore({
           content: "",
         },
         moduleContent: {
-          isShow: true, moduleName: "专业技能", headerImg: 'star', content: [
+          isShow: true, moduleName: "个人能力", headerImg: 'star', content: [
             {
               id: 0,
-              editor_id:`专业技能0`,
+              editor_id:`个人能力0`,
               title: {text1: "", text2: "", date1: "", date2: "", education: ''},
               content: "",
             },
@@ -271,11 +271,9 @@ export default createStore({
         }
       },
     ]),
-
     colors:reactive([
-      {title: '皮肤颜色', color: [{value: '#80D2C8'}, {value: '#FFD4A9'},]},
-      {title: '字体颜色', color: [{value: '#ffffff'}, {value: '#000000'}, {value: '#555555'}]},
-      {title: '标签颜色', color: [{value: 'rgba(58,95,133,0.2)'}, {value: 'rgba(255,215,219,1)'}]},
+      {title: '模块字体颜色', color: [{value: '#00CED1FF'}, {value: '#00CED1FF'},{value: '#555555CC'},]},
+      {title: '模块标签颜色', color: [{value: '#3A5F8533'}, {value: '#FFD7DBFF'}]},
     ]),
     resumeList:reactive([
       {isShow: true, moduleName: "工作经验", headerImg: '', content: []},
