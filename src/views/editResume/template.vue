@@ -20,15 +20,17 @@
 </template>
 
 <script>
-import {userInfoHandle, initInfo} from '@/hooks/UserInfoHandle'
+import {initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive,} from "vue";
-// import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../components/ResumeEditor'
+// import Avatar from '../../../components/Avatar'
+// import MdEditor from 'md-editor-v3'
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "1",
-  components: {ResumeEditor
+  components: {ResumeEditor,
+    // Avatar,
     // ,MdEditor
   },
   setup() {
@@ -42,30 +44,11 @@ export default defineComponent({
     return {
       colorsConfig,
       ...initInfo(),
-      ...userInfoHandle(),
     }
   }
 })
 </script>
 
 <style scoped>
-
-#resume1 .hidden_img {
-  width: 124px;
-  height: 154px;
-  position: absolute;
-  top: 25px;
-  left: 55px;
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-#resume1 .hidden_img:hover {
-  opacity: 0.8;
-  background: #CDD0D6;
-  cursor: pointer;
-}
 
 </style>

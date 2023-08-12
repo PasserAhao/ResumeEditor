@@ -2,7 +2,7 @@
   <!-- 头部 -->
   <div style="height: 60px;width: 100vw;background: #4cc9f0" id="EditResume">
     <div style="width: 90%;margin: 0 auto;overflow: hidden;font-size: 22px;font-weight: bold">
-      <span @click="router.back()" style="cursor: pointer;float: left;line-height: 60px;">&lt; 首页</span>
+      <span @click="router.push({path:`/`})" style="cursor: pointer;float: left;line-height: 60px;">&lt; 首页</span>
       <!--        -->
       <div style="float: left;margin-left: 10vw;margin-top: 9px">
         <el-dropdown :hide-on-click="false">
@@ -113,14 +113,14 @@ export default defineComponent({
   margin-top: 15px;
 }
 
-#myResume-index /deep/ .md-editor-preview p {
+/deep/ #ContentBody  .md-editor-preview p {
   letter-spacing: var(--FontSpace);
   font-size: var(--FontSize);
   line-height: var(--LineHeight);
   padding: var(--PaddingTB) 0;
 }
 
-#myResume-index /deep/ .control-Title {
+/deep/ #ContentBody .control-Title {
   display: flex;
   justify-content: space-between;
   width: 100%;

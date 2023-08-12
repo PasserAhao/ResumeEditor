@@ -35,7 +35,7 @@
         <div style="width: 302px;" :style="{borderBottom:`${colorsConfig[0].color[1].value} solid 12px`}"/>
       </div>
       <!--    内容主体       -->
-      <div style="margin: 0 50px;">
+      <div id ="ContentBody" style="margin: 0 50px;">
         <div style="height: 15px;" :style="{borderLeft:`${colorsConfig[0].color[0].value} solid 2px`}"/>
         <!--     基本信息         -->
         <div :style="{color:colorsConfig[1].color[2].value}">
@@ -94,17 +94,7 @@
 
               <!--       头像             -->
               <div style="float: right;min-height: 140px;width: 200px">
-                <div style="margin-bottom: 10px;position: relative">
-                  <el-image style="background: #f5f7fa;width: 115px;height: 140px;margin: 15px 0 0 55px"
-                            :src="imgUrl">
-                    <template #error>
-                      <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
-                    </template>
-                  </el-image>
-                  <div @click="openFile" class="hidden_img">
-                    <camera style="margin-top: 60px" theme="outline" size="25" fill="#ffffff"/>
-                  </div>
-                </div>
+                <AvatarTem width="115" height="140"/>
               </div>
             </div>
           </div>
@@ -178,17 +168,18 @@
 </template>
 
 <script>
-import {userInfoHandle, initInfo} from '@/hooks/UserInfoHandle'
+import {initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive, ref} from "vue";
 import MdEditor from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
+import AvatarTem from '../../../components/AvatarTem'
 
-import {Camera, Pic, Handbag, BachelorCapOne,} from '@icon-park/vue-next';
+import {Handbag, BachelorCapOne,} from '@icon-park/vue-next';
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "2",
-  components: {Camera, Pic, Handbag, BachelorCapOne, MdEditor, ResumeEditor,},
+  components: {Handbag, BachelorCapOne, MdEditor, ResumeEditor, AvatarTem},
   setup() {
     const temID = ref("tem2")
     const colorsConfig = reactive([
@@ -202,35 +193,18 @@ export default defineComponent({
       {title: '简历文本2', text: 'Personal Resume'},
     ])
 
+    const aaa = ref("15px")
+
     return {
       baseInfo,
-      colorsConfig, temID,
+      colorsConfig, temID,aaa,
       ...initInfo(temID.value, colorsConfig),
-      ...userInfoHandle(),
     }
   }
 })
 </script>
 
 <style scoped>
-
-#resume1 .hidden_img {
-  width: 115px;
-  height: 140px;
-  position: absolute;
-  top: 15px;
-  left: 55px;
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-#resume1 .hidden_img:hover {
-  opacity: 0.8;
-  background: #CDD0D6;
-  cursor: pointer;
-}
 
 #resume1 .infoTle {
   width: 80px;

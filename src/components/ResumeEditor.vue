@@ -1,5 +1,5 @@
 <template>
-  <div class="ResumeEditor" @keyup="saveInfo" @mouseup="saveInfo">
+  <div class="ResumeEditor" @keyup="saveInfo" @mousemove="saveInfo">
     <el-tabs type="border-card" class="demo-tabs Edit-table" tab-position="left">
       <!--     简历配置   -->
       <!--     简历配置   -->
