@@ -167,8 +167,6 @@
           <MdEditor style="height:600px" :editor-id="'skillAnd1'" v-model="skillInfo.text" :preview="false"
                     :toolbars="tooBars"/>
           <!--      技能管理      -->
-          <!--      技能管理      -->
-          <!--      技能管理      -->
           <div style="margin-bottom: 10px">
             <h3>技能管理</h3>
 
@@ -206,8 +204,6 @@
               </div>
             </div>
           </div>
-          <!--     爱好管理       -->
-          <!--     爱好管理       -->
           <!--     爱好管理       -->
           <div style="margin-bottom: 100px">
             <h3>爱好管理</h3>
@@ -357,10 +353,6 @@
     </el-tabs>
     <!--  增加模块  -->
     <!--  增加模块  -->
-    <!--  增加模块  -->
-    <!--  增加模块  -->
-    <!--  增加模块  -->
-    <!--  增加模块  -->
     <el-dialog v-model="ModuleDialog" title="添加模块" width="30%" align-center>
       <el-form>
 
@@ -421,7 +413,6 @@ import {defineComponent, reactive, ref} from "vue";
 import {CircleDoubleUp, Delete} from '@icon-park/vue-next';
 import MdEditor from 'md-editor-v3';
 import {ElMessage} from "element-plus";
-
 
 export default defineComponent({
   name: "ResumeEditor",

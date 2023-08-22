@@ -113,14 +113,14 @@ export default defineComponent({
   margin-top: 15px;
 }
 
-/deep/ #ContentBody  .md-editor-preview p {
+:deep( #ContentBody  .md-editor-preview p) {
   letter-spacing: var(--FontSpace);
   font-size: var(--FontSize);
   line-height: var(--LineHeight);
   padding: var(--PaddingTB) 0;
 }
 
-/deep/ #ContentBody .control-Title {
+:deep(#ContentBody .control-Title) {
   display: flex;
   justify-content: space-between;
   width: 100%;

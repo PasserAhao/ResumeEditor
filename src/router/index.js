@@ -11,6 +11,7 @@ const routes = [
             {path: '2', name: '2', component: () => import('../views/editResume/template/2')},
         ]
     },
+    {path: '/test', name: 'Test', component: () => import('../views/editResume/test')},
 ]
 
 const router = createRouter({
