@@ -3,7 +3,7 @@
     <template #overlay>
       <div >
         <ul class="emoji-container">
-          <li class="emojis" v-for="(emoji, index) of emojis" :key="`emoji-${Index}`" @click="handler(emoji)" v-text="emoji"/>
+          <li class="emojis" v-for="(emoji, index) of emojis" :key="index" @click="handler(emoji)" v-text="emoji"/>
         </ul>
       </div>
     </template>
@@ -67,3 +67,4 @@ const handler = (emoji: any) => {
   cursor: pointer;
 }
 </style>
+

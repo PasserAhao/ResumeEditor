@@ -418,8 +418,8 @@ import {defineComponent, reactive, ref} from "vue";
 import {CircleDoubleUp, Delete} from '@icon-park/vue-next';
 import {MdEditor} from 'md-editor-v3';
 import {ElMessage} from "element-plus";
-import EmojiSion from './EmojiExtension/Index'
-import ChatGptSion from './ChatGptExtenSion/Index'
+import EmojiSion from './EmojiExtension/EmojiSion'
+import ChatGptSion from './ChatGptExtenSion/ChatGptSion'
 
 export default defineComponent({
   name: "ResumeEditor",

@@ -1,9 +1,6 @@
 <template>
   <div style="width: 80vw;margin:50px auto">
     <MdEditor v-model="text.text" :toolbars="tooBars">
-      <template #defToolbars>
-        <EmojiSion/>
-      </template>
     </MdEditor>
     <Entertainment></Entertainment>
   </div>
@@ -15,9 +12,7 @@ import {MdEditor} from 'md-editor-v3';
 import {Entertainment} from '@icon-park/vue-next';
 export default defineComponent({
   name: "TestDemo",
-  components: {MdEditor, Entertainment,
-    EmojiSion
-  },
+  components: {MdEditor, Entertainment},
   props: {},
   setup() {
     const text = reactive({
