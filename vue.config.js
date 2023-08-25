@@ -7,9 +7,25 @@
 
 // 用于github pages
 module.exports = {
-  outputDir:'./Editor',
+  lintOnSave: true, // 暂时关闭代码格式检测
+  outputDir: './Editor',
   publicPath: process.env.NODE_ENV === 'production'
-      ? '/resumeeditor/'
-      : '/'
+    ? '/resumeeditor/'
+    : '/',
+  configureWebpack: {
+    resolve: { extensions: [".ts", ".tsx", ".js", ".json"] },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/,
+          options: {
+            appendTsSuffixTo: [/\.vue$/],
+          }
+        }
+      ]
+    }
+  }
 }
 

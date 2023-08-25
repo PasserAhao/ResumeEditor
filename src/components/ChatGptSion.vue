@@ -1,5 +1,17 @@
 <template>
   <DropdownToolbar title="emoji" :visible="visible" :onChange="onChange">
+    <template #overlay>
+      <div class="emoji-container">
+        <ol class="emojis">
+          <li
+            v-for="(emoji, index) of emojis"
+            :key="`emoji-${index}`"
+            @click="handler(emoji)"
+            v-text="emoji"
+          ></li>
+        </ol>
+      </div>
+    </template>
     <template #trigger>
       <svg class="md-editor-icon" aria-hidden="true">
         <use xlink:href="#icon-emoji"></use>
@@ -9,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from 'vue';
-import { DropdownToolbar } from 'md-editor-v3';
-import type {Insert} from 'md-editor-v3'
+import { PropType, ref } from "vue";
+import { DropdownToolbar } from "md-editor-v3";
+import type { Insert } from "md-editor-v3";
 
-const emojis = ['😀', '😃'];
+const emojis = ["😀", "😃"];
 
 const props = defineProps({
   /**
@@ -23,8 +35,8 @@ const props = defineProps({
     type: Function as PropType<Insert>,
     default: () => {
       //
-    }
-  }
+    },
+  },
 });
 
 const visible = ref(false);
@@ -45,7 +57,7 @@ const handler = (emoji: any) => {
       targetValue: emoji,
       select: true,
       deviationStart: 0,
-      deviationEnd: 0
+      deviationEnd: 0,
     };
   });
 };

@@ -1,0 +1,28 @@
+{
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/main.js"
+  ],
+  "moduleResolution": "Node", // 模块解析方式
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "outDir": "./",
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "allowJs": true,
+    "target": "es2016",
+    "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["webpack-env"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
