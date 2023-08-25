@@ -1,5 +1,5 @@
 <template>
-  <div id="resume1">
+  <div id="resume">
     <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;position: relative">
       <!--    头部内容        -->
       <div style="display: flex" :style="{color:colorsConfig[2].color[0].value}">

@@ -34,7 +34,7 @@
         </el-dropdown>
       </div>
       <!--      -->
-      <el-button v-print="'#resume1'" class="saveToPdf">保存为PDF</el-button>
+      <el-button v-print="'#resume'" class="saveToPdf">保存为PDF</el-button>
     </div>
 
   </div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, reactive, onMounted} from "vue";
+import {defineComponent, ref, reactive, onMounted, watch} from "vue";
 import {useRouter} from "vue-router";
 import {AlignTextBothOne} from '@icon-park/vue-next';
 
@@ -82,26 +82,17 @@ export default defineComponent({
       document.documentElement.style.setProperty("--LineHeight", YStyle.LineHeight + "rem");
       document.documentElement.style.setProperty("--PaddingTB", YStyle.PaddingTB + "px");
     });
-    const GlobalChangeEvent = () => {
-      const GlobalSpace = () => {
-        document.documentElement.style.setProperty(
-            "--FontSpace", YStyle.FontSpace + CStyle.FontSpace + "rem"
-        );
-        document.documentElement.style.setProperty(
-            "--LineHeight", YStyle.LineHeight + CStyle.LineHeight + "rem"
-        );
-        document.documentElement.style.setProperty(
-            "--PaddingTB", YStyle.PaddingTB + CStyle.PaddingTB + "px"
-        );
-      }
-      return {
-        GlobalSpace
-      }
-    }
+    // 监听变量的方法
+    ((color)=> {
+      watch(color, (newValue, oldValue) => {
+        document.documentElement.style.setProperty("--FontSpace", YStyle.FontSpace + CStyle.FontSpace + "rem");
+        document.documentElement.style.setProperty("--LineHeight", YStyle.LineHeight + CStyle.LineHeight + "rem");
+        document.documentElement.style.setProperty("--PaddingTB", YStyle.PaddingTB + CStyle.PaddingTB + "px");}
+      )
+    })(CStyle)
 
     return {
-      router, data, CStyle,
-      ...GlobalChangeEvent()
+      router, data, CStyle
     }
   },
 })

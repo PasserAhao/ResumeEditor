@@ -165,7 +165,12 @@
         </template>
         <div class="EditBack">
           <MdEditor style="height:600px" :editor-id="'skillAnd1'" v-model="skillInfo.text" :preview="false"
-                    :toolbars="tooBars"/>
+                    :toolbars="tooBars">
+            <template #defToolbars>
+              <EmojiSion/>
+              <ChatGptSion :content="skillInfo.text"/>
+            </template>
+          </MdEditor>
           <!--      技能管理      -->
           <div style="margin-bottom: 10px">
             <h3>技能管理</h3>
@@ -411,12 +416,14 @@
 <script>
 import {defineComponent, reactive, ref} from "vue";
 import {CircleDoubleUp, Delete} from '@icon-park/vue-next';
-import MdEditor from 'md-editor-v3';
+import {MdEditor} from 'md-editor-v3';
 import {ElMessage} from "element-plus";
+import EmojiSion from './EmojiExtension/Index'
+import ChatGptSion from './ChatGptExtenSion/Index'
 
 export default defineComponent({
   name: "ResumeEditor",
-  components: {MdEditor, CircleDoubleUp, Delete},
+  components: {MdEditor, CircleDoubleUp, Delete, EmojiSion, ChatGptSion},
   props: {
     temId: {
       type: String,
@@ -457,15 +464,16 @@ export default defineComponent({
     const InfoDialog = ref(false)
     const tooBars = reactive([
       'bold',
-      'title',
       'sub',
       'sup',
       'unorderedList',
       'task',
       '-',
       'table',
-      'mermaid',
+      0,
+      1,
       'pageFullscreen',
+      '-',
       '=',
       'preview',
       'htmlPreview',

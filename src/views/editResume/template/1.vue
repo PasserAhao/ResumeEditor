@@ -1,5 +1,5 @@
 <template>
-  <div id="resume1">
+  <div id="resume">
     <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden"
          :style="{background:`linear-gradient(to right, ${colorsConfig[2].color[0].value} 240px, white 240px)`}">
       <!--   简历左边部分     -->
@@ -47,7 +47,8 @@
               <span style="background: white;border-radius: 50%;padding: 4px 5px 3px 5px">
                 <phone-call v-if="info.label === '电话'" theme="two-tone" size="18"
                             :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
-                <mail-open v-else-if="info.label === '邮箱'" theme="two-tone" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
+                <mail-open v-else-if="info.label === '邮箱'" theme="two-tone" size="18"
+                           :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
                 <star v-else theme="outline" size="18" :fill="[colorsConfig[2].color[0].value ,'#ffffff']"/>
               </span>
               <span>&nbsp;&nbsp;{{ info.txt }}</span>
@@ -57,9 +58,9 @@
         </div>
         <!--      自定义信息        -->
         <!--      自定义信息        -->
-        <div v-show="skillInfo.text" style="margin:50px 20px;font-size: 22px">
-          <MdEditor :style="{color:colorsConfig[3].color[0].value,background:colorsConfig[2].color[0].value}"
-                    :editor-id="'skill'" :previewOnly="true" v-model="skillInfo.text"/>
+        <div id="left-resume1" v-show="skillInfo.text" style="margin:50px 20px;font-size: 22px">
+          <MdPreview :style="{background:colorsConfig[2].color[0].value}"
+                     :editor-id="'skill'" v-model="skillInfo.text"/>
         </div>
         <!--      技能特长        -->
         <!--      技能特长        -->
@@ -153,8 +154,8 @@
 
 <script>
 import {initInfo} from '@/hooks/UserInfoHandle'
-import {defineComponent, reactive, ref} from "vue";
-import MdEditor from 'md-editor-v3'
+import {defineComponent, reactive, ref, watch} from "vue";
+import {MdPreview} from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
 import AvatarTem from '../../../components/AvatarTem'
 import ModuleContent1 from '../../../components/ModuleContent1'
@@ -170,17 +171,24 @@ export default defineComponent({
   components: {
     Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag, Comment,
     Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne,
-    MdEditor, ResumeEditor, AvatarTem,ModuleContent1
+    MdPreview, ResumeEditor, AvatarTem, ModuleContent1
   },
   setup() {
     const temID = ref("tem1")
     const colorsConfig = reactive([
-      {title: '模块字体颜色', color: [{value: '#00CED1FF'}, {value: '#00CED1FF'},{value: '#555555CC'},]},
+      {title: '模块字体颜色', color: [{value: '#00CED1FF'}, {value: '#00CED1FF'}, {value: '#555555CC'},]},
       {title: '模块标签颜色', color: [{value: '#3A5F8533'}, {value: '#FFD7DBFF'}]},
       {title: '皮肤颜色', color: [{value: '#FFD700FF'}]},
       {title: '左侧字体颜色', color: [{value: '#FFFFFFFF'}]},
     ])
-
+    // 监听变量的方法
+    const WatchColor = (Color) => {
+      watch(Color, (newValue, oldValue) => {
+            document.documentElement.style.setProperty("--resume1-left-color", Color[3].color[0].value);
+          }
+      );
+    };
+    WatchColor(colorsConfig)
     return {
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
@@ -190,4 +198,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
+:deep(#left-resume1 .md-editor-preview p) {
+  color: var(--resume1-left-color);
+}
 </style>

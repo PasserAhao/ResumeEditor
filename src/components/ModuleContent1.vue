@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="resume-content">
   <div v-for="(con,index2) in moduleContent" :key="index2"
        :style="{color:colorsConfig[0].color[1].value}" style="width: 520px;margin: 0 auto;">
     <!--       自定义模块Title           -->
@@ -13,8 +13,7 @@
     <!--       自定义模块content           -->
     <!--       自定义模块content           -->
     <div>
-      <MdEditor :style="{color:colorsConfig[0].color[2].value}"
-                :editor-id="con.editor_id" :previewOnly="true" v-model="con.content"/>
+      <MdPreview :editor-id="con.editor_id" v-model="con.content"/>
     </div>
     <!--       自定义模块Tag           -->
     <!--       自定义模块Tag           -->
@@ -35,16 +34,28 @@
 </template>
 
 <script>
-import {defineComponent} from "vue";
-import MdEditor from 'md-editor-v3'
+import {defineComponent, onMounted, watch} from "vue";
+import {MdPreview} from 'md-editor-v3'
 export default defineComponent({
   name: "ModuleContent1",
-  components:{MdEditor},
+  components:{MdPreview},
   props :{
     colorsConfig:Array,
     moduleContent:Array
   },
-  setup(){
+  setup(props){
+    const color = props.colorsConfig[0].color[2]
+    // 在组件挂载后，设置 CSS 变量的值
+    onMounted(() => {
+      document.documentElement.style.setProperty("--Color", color.value);
+    });
+    // 监听变量的方法
+    ((color)=> {
+      watch(color, (newValue, oldValue) => {
+            document.documentElement.style.setProperty("--Color", color.value);
+          }
+      )
+    })(props.colorsConfig[0].color[2])
     return {
     }
   }
@@ -52,5 +63,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+:deep( .md-editor-preview p){
+  color: var(--Color);
+}
 </style>
