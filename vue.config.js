@@ -8,7 +8,7 @@
 // 用于github pages
 module.exports = {
   lintOnSave: true, // 暂时关闭代码格式检测
-  outputDir: './Editor',
+  outputDir: './editor',
   publicPath: process.env.NODE_ENV === 'production'
     ? '/resumeeditor/'
     : '/',
