@@ -136,7 +136,7 @@
                   </div>
                 </div>
                 <!--      自定义模块内容           -->
-                <ModuleContent1 :colors-config="colorsConfig" :module-content="item.content" :content-width="80"/>
+                <ModuleContent1 :colors-config="colorsConfig" :module-content="item.content" :content-width="90"/>
               </div>
 
             </div>
@@ -185,12 +185,13 @@ export default defineComponent({
     ])
     // 监听变量的方法
     const WatchColor = (Color) => {
-      watch(Color, (newValue, oldValue) => {
+      watch(Color, () => {
             document.documentElement.style.setProperty("--resume1-left-color", Color[3].color[0].value);
           }
       );
     };
     WatchColor(colorsConfig)
+
     return {
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),

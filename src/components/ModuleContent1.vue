@@ -1,5 +1,5 @@
 <template>
-<div id="resume-content">
+<div id="resume-content" style="margin-left: 35px">
   <div v-for="(con,index2) in moduleContent" :key="index2"
        :style="{color:colorsConfig[0].color[1].value,width: `${contentWidth}%`,margin:' 0 auto'}">
     <!--       自定义模块Title           -->
@@ -52,7 +52,7 @@ export default defineComponent({
     });
     // 监听变量的方法
     ((color)=> {
-      watch(color, (newValue, oldValue) => {
+      watch(color, () => {
             document.documentElement.style.setProperty("--Color", color.value);
           }
       )

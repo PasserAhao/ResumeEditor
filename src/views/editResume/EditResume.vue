@@ -86,7 +86,7 @@ export default defineComponent({
     });
     // 监听变量的方法
     ((color) => {
-      watch(color, (newValue, oldValue) => {
+      watch(color, () => {
             document.documentElement.style.setProperty("--FontSpace", YStyle.FontSpace + CStyle.FontSpace + "rem");
             document.documentElement.style.setProperty("--LineHeight", YStyle.LineHeight + CStyle.LineHeight + "rem");
             document.documentElement.style.setProperty("--PaddingTB", YStyle.PaddingTB + CStyle.PaddingTB + "px");

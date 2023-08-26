@@ -1,4 +1,5 @@
 <template>
+<div>
   <div id="resume">
     <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;position: relative">
       <!--    头部内容        -->
@@ -110,9 +111,9 @@
               <span class="Title-left-san" :style="{background:'rgba(0,0,0,0.5)'}"/>
             </div>
             <!--     内容部分          -->
-            <div style="margin-top: -4px"
+            <div style="margin-top: -4px;padding-top: 8px"
                  :style="{borderLeft:`${colorsConfig[2].color[0].value} solid 2px`,borderTop:`${colorsConfig[2].color[0].value} solid 2px`}">
-              <ModuleContent1 :colors-config="colorsConfig" :module-content="module.content" :content-width="95"/>
+              <ModuleContent1 :colors-config="colorsConfig" :module-content="module.content" :content-width="100"/>
             </div>
           </div>
         </div>
@@ -126,6 +127,7 @@
   <!--      右边操作栏部分    -->
   <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig" :colors="colorsConfig"
                 :titles="baseInfo"/>
+</div>
 </template>
 
 <script>
