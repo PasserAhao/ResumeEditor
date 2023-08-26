@@ -1,5 +1,5 @@
 <template>
-<div id="resume-content" style="margin-left: 35px">
+<div id="resume-content" style="margin-left:35px;padding-bottom: 8px">
   <div v-for="(con,index2) in moduleContent" :key="index2"
        :style="{color:colorsConfig[0].color[1].value,width: `${contentWidth}%`,margin:' 0 auto'}">
     <!--       自定义模块Title           -->
