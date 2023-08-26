@@ -322,7 +322,12 @@
               <!--项目详细内容-->
               <MdEditor :style="{height:module.AllowChild===true?'400px':'500px'}"
                         :editor-id="item.editor_id"
-                        v-model="item.content" :preview="false" :toolbars="tooBars"/>
+                        v-model="item.content" :preview="false" :toolbars="tooBars">
+                <template #defToolbars>
+                  <EmojiSion/>
+                  <ChatGptSion :content="item.content"/>
+                </template>
+              </MdEditor>
               <!--标签处理-->
               <div v-if="module.showTag">
                 <!--添加标签-->

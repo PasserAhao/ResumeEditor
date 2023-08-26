@@ -1,7 +1,7 @@
 <template>
 <div id="resume-content">
   <div v-for="(con,index2) in moduleContent" :key="index2"
-       :style="{color:colorsConfig[0].color[1].value}" style="width: 520px;margin: 0 auto;">
+       :style="{color:colorsConfig[0].color[1].value,width: `${contentWidth}%`,margin:' 0 auto'}">
     <!--       自定义模块Title           -->
     <!--       自定义模块Title           -->
     <div v-if="con.title" class="control-Title">
@@ -41,7 +41,8 @@ export default defineComponent({
   components:{MdPreview},
   props :{
     colorsConfig:Array,
-    moduleContent:Array
+    moduleContent:Array,
+    contentWidth:Number
   },
   setup(props){
     const color = props.colorsConfig[0].color[2]

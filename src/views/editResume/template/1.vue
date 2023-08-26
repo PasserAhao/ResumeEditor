@@ -136,7 +136,7 @@
                   </div>
                 </div>
                 <!--      自定义模块内容           -->
-                <ModuleContent1 :colors-config="colorsConfig" :module-content="item.content"/>
+                <ModuleContent1 :colors-config="colorsConfig" :module-content="item.content" :content-width="80"/>
               </div>
 
             </div>
