@@ -9,7 +9,7 @@
         </p>
         <p>
           <span>没有心怡的模板？网站有BUG？请
-            <a  target="_blank" href="http://bonianahao.com/index/proFeedback">请点击反馈</a>
+            <a  target="_blank" href="http://bonianahao.gitee.io/myblog/#/index/proFeedback">请点击反馈</a>
           </span>
         </p>
         <p>
