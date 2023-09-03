@@ -34,3 +34,7 @@
     flex-direction: row;
     justify-content: left;
 }
+
+#resume .md-editor-preview-wrapper {
+    padding: 0;
+}
