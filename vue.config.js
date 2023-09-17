@@ -11,7 +11,7 @@ module.exports = {
   outputDir: './editor',
   publicPath: process.env.NODE_ENV === 'production'
     ? '/resumeeditor/'
-    : '/',
+    : './',
   configureWebpack: {
     resolve: { extensions: [".ts", ".tsx", ".js", ".json"] },
     module: {
