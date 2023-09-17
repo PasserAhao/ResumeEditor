@@ -38,3 +38,10 @@
 #resume .md-editor-preview-wrapper {
     padding: 0;
 }
+
+#resume .md-editor-previewOnly ul {
+    margin: 0;
+}
+#resume .md-editor-previewOnly li {
+    margin: 0;
+}

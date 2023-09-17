@@ -4,7 +4,7 @@
        :style="{color:colorsConfig[0].color[1].value,width: `${contentWidth}%`,margin:' 0 auto'}">
     <!--       自定义模块Title           -->
     <!--       自定义模块Title           -->
-    <div v-if="con.title" class="control-Title">
+    <div v-if="con.title" class="control-Title" style="display: flex;justify-content: space-between">
       <div v-if="con.title.date1">{{ con.title.date1 }}~{{ con.title.date2 }}</div>
       <div v-if="con.title.text1" style="font-weight: bold">{{ con.title.text1 }}</div>
       <div v-if="con.title.text2">{{ con.title.text2 }}</div>

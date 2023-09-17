@@ -42,12 +42,16 @@
         <div :style="{color:colorsConfig[0].color[2].value}">
           <!--     标题部分           -->
           <div style="height: 24px;position: relative">
-            <span class="Title-content"
+            <span
+                  style="padding: 0 10px 0 27px;  margin-left: -17px;  font-size: 16px"
                   :style="{background:colorsConfig[2].color[0].value,color:colorsConfig[0].color[0].value}">
               基本信息
             </span>
-            <span class="Title-right-san" :style="{background:colorsConfig[2].color[0].value}"/>
-            <span class="Title-left-san" :style="{background:'rgba(0,0,0,0.5)'}"/>
+            <span style="position: absolute;  width: 20px;  height: 20px;  left: 83px;  clip-path: polygon(0 0, 0% 100%, 100% 100%)"
+                  :style="{background:colorsConfig[2].color[0].value}"/>
+            <span
+                  style="position: absolute;  height: 6px;  width: 17px;  top: 20px;  left: -17px;  clip-path: polygon(0 0, 100% 0, 100% 100%)"
+                  :style="{background:'rgba(0,0,0,0.5)'}"/>
 
           </div>
           <!--     个人基本信息          -->
@@ -104,11 +108,15 @@
           <div v-if="module.isShow">
             <!--     标题部分           -->
             <div style="height: 24px;position: relative">
-              <span class="Title-content"
+              <span style="padding: 0 10px 0 27px;  margin-left: -17px;  font-size: 16px"
                     :style="{background:colorsConfig[2].color[0].value,color:colorsConfig[0].color[0].value}">
                 {{ module.moduleName }}</span>
-              <span class="Title-right-san" :style="{background:colorsConfig[2].color[0].value}"/>
-              <span class="Title-left-san" :style="{background:'rgba(0,0,0,0.5)'}"/>
+              <span
+                    style="position: absolute;  width: 20px;  height: 20px;  left: 83px;  clip-path: polygon(0 0, 0% 100%, 100% 100%)"
+                    :style="{background:colorsConfig[2].color[0].value}"/>
+              <span
+                    style="position: absolute;  height: 6px;  width: 17px;  top: 20px;  left: -17px;  clip-path: polygon(0 0, 100% 0, 100% 100%)"
+                    :style="{background:'rgba(0,0,0,0.5)'}"/>
             </div>
             <!--     内容部分          -->
             <div style="margin-top: -4px;padding-top: 8px"
