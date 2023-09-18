@@ -160,6 +160,8 @@
     <!--      右边操作栏部分    -->
     <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig" :colors="colorsConfig"
                   :skill="skillInfo"/>
+    <input v-show="false" ref="imgInput" type="file" accept="image/*" @change="getImageUrl"
+           style="opacity: 0"/>
   </div>
 
 </template>

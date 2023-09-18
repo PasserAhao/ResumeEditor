@@ -10,7 +10,7 @@ module.exports = {
   lintOnSave: true, // 暂时关闭代码格式检测
   outputDir: './editor',
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/resume-project-testing/'
+    ? '/resumeeditor/'
     : '/',
   configureWebpack: {
     resolve: { extensions: [".ts", ".tsx", ".js", ".json"] },
