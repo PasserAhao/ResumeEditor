@@ -2,7 +2,7 @@ import {ref} from "vue";
 import {useStore} from "vuex"
 
 export function AvatarHandle() {
-    const imgUrl = ref(require('../assets/img/myself.png'))
+    const imgUrl = ref(require('../assets/img/th.jpg'))
     const imgInput = ref()
     const openFile = () => {
         imgInput.value.dispatchEvent(new MouseEvent('click'))

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {initInfo} from '@/hooks/UserInfoHandle'
+import {AvatarHandle, initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive, ref,} from "vue";
 import ResumeEditor from '../../components/ResumeEditor'
 // import Avatar from '../../../components/Avatar'
@@ -34,6 +34,7 @@ export default defineComponent({
     return {
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
+      ...AvatarHandle()
     }
   }
 })

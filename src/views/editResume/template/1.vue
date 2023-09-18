@@ -1,15 +1,25 @@
 <template>
   <div>
     <div id="resume">
-      <div style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden"
+      <div id="resumeBody"
+          style="width: 820px;min-height: 1160px;background: white;margin: 0 auto;overflow: hidden"
            :style="{background:`linear-gradient(to right, ${colorsConfig[2].color[0].value} 240px, white 240px)`}">
         <!--   简历左边部分     -->
         <!--   简历左边部分     -->
         <!--   简历左边部分     -->
-        <div style="width: 240px;float: left;position: relative;">
+        <div id="tem1-left" style="width: 240px;float: left;position: relative;" :style="{height:`${boxHeight}px`}">
           <!--   头像部分         -->
           <!--   头像部分         -->
-          <AvatarTem width="124" height="154"/>
+          <div style="margin-bottom: 10px;position: relative">
+            <el-image style="background: #f5f7fa;margin: 25px 0 0 55px;width: 124px;height: 154px" :src="imgUrl">
+              <template #error>
+                <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
+              </template>
+            </el-image>
+            <div @click="openFile" class="hidden_img" style="width: 124px;height: 154px">
+              <camera style="margin-top: 60px" theme="outline" size="25" fill="#ffffff"/>
+            </div>
+          </div>
           <!--     基础信息       -->
           <!--     基础信息       -->
           <div style="display: flex;flex-direction: column;margin: 15px 0 0 20px"
@@ -156,15 +166,16 @@
 
 <script>
 import {initInfo} from '@/hooks/UserInfoHandle'
-import {defineComponent, reactive, ref, watch} from "vue";
+import {defineComponent, onMounted, reactive, ref, watch} from "vue";
 import {MdPreview} from 'md-editor-v3'
 import ResumeEditor from '../../../components/ResumeEditor'
 import AvatarTem from '../../../components/AvatarTem'
 import ModuleContent1 from '../../../components/ModuleContent1'
-
+import {AvatarHandle} from '@/hooks/UserInfoHandle'
 import {
   Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag,
   Comment, Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne,
+  Camera, Pic,
 } from '@icon-park/vue-next';
 
 export default defineComponent({
@@ -173,7 +184,7 @@ export default defineComponent({
   components: {
     Calendar, PhoneCall, MailOpen, WebPage, Local, Male, BookOpen, Handbag, Comment,
     Star, MedalOne, SeoFolder, Briefcase, BachelorCapOne,
-    MdPreview, ResumeEditor, AvatarTem, ModuleContent1
+    MdPreview, ResumeEditor, AvatarTem, ModuleContent1, Camera, Pic,
   },
   setup() {
     const temID = ref("tem1")
@@ -192,9 +203,19 @@ export default defineComponent({
     };
     WatchColor(colorsConfig)
 
+    const boxHeight = ref(1160)
+    onMounted(()=>{
+      const box = document.getElementById("ContentBody")
+      const resize = new ResizeObserver(()=>{
+         boxHeight.value = Math.ceil(box.offsetHeight / 1160) * 1160
+      })
+      resize.observe(box)
+    })
+
     return {
-      colorsConfig, temID,
+      colorsConfig, temID,boxHeight,
       ...initInfo(temID.value, colorsConfig),
+      ...AvatarHandle()
     }
   }
 })
@@ -203,5 +224,21 @@ export default defineComponent({
 <style scoped>
 :deep(#left-resume1 .md-editor-preview p) {
   color: var(--resume1-left-color);
+}
+
+.hidden_img {
+  position: absolute;
+  top: 25px;
+  left: 55px;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hidden_img:hover {
+  opacity: 0.8;
+  background: #CDD0D6;
+  cursor: pointer;
 }
 </style>

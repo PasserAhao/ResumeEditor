@@ -98,7 +98,16 @@
 
               <!--       头像             -->
               <div style="float: right;min-height: 140px;width: 200px">
-                <AvatarTem width="115" height="140"/>
+                <div style="margin-bottom: 10px;position: relative">
+                  <el-image style="background: #f5f7fa;margin: 25px 0 0 55px;width: 115px;height: 140px" :src="imgUrl">
+                    <template #error>
+                      <pic style="margin: 60px 50px" theme="outline" size="25" fill="#b1aaaa"/>
+                    </template>
+                  </el-image>
+                  <div @click="openFile" class="hidden_img" style="width: 115px;height: 140px">
+                    <camera style="margin-top: 60px" theme="outline" size="25" fill="#ffffff"/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -135,22 +144,26 @@
   <!--      右边操作栏部分    -->
   <ResumeEditor :tem-id="temID" :u-info="userinfo" :re-set="ModuleList" :md-set="ModuleConfig" :colors="colorsConfig"
                 :titles="baseInfo"/>
+
+  <input v-show="false" ref="imgInput" type="file" accept="image/*" @change="getImageUrl"
+         style="opacity: 0"/>
 </div>
 </template>
 
 <script>
 import {initInfo} from '@/hooks/UserInfoHandle'
 import {defineComponent, reactive, ref} from "vue";
-import {Handbag, BachelorCapOne,} from '@icon-park/vue-next';
+import {Handbag, BachelorCapOne,Camera, Pic,} from '@icon-park/vue-next';
 import ResumeEditor from '../../../components/ResumeEditor'
 import AvatarTem from '../../../components/AvatarTem'
 import ModuleContent1 from '../../../components/ModuleContent1'
+import {AvatarHandle} from '@/hooks/UserInfoHandle'
 
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
   name: "2",
-  components: {Handbag, BachelorCapOne, ResumeEditor, AvatarTem, ModuleContent1},
+  components: {Handbag, BachelorCapOne, ResumeEditor, AvatarTem, ModuleContent1, Camera, Pic,},
   setup() {
     const temID = ref("tem2")
     const colorsConfig = reactive([
@@ -168,6 +181,7 @@ export default defineComponent({
       baseInfo,
       colorsConfig, temID,
       ...initInfo(temID.value, colorsConfig),
+      ...AvatarHandle()
     }
   }
 })
@@ -211,5 +225,21 @@ export default defineComponent({
   padding: 0 10px 0 27px;
   margin-left: -17px;
   font-size: 16px
+}
+
+.hidden_img {
+  position: absolute;
+  top: 25px;
+  left: 55px;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hidden_img:hover {
+  opacity: 0.8;
+  background: #CDD0D6;
+  cursor: pointer;
 }
 </style>
