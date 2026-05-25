@@ -1,0 +1,38 @@
+#ResumeEditor {
+    background: #b78080;
+    height: calc(100vh - 60px);
+    width: 460px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#ResumeEditor .EditBack {
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+}
+
+
+#ResumeEditor .delete1 {
+    cursor: pointer;
+    text-align: center;
+    background: #b78080;
+    border-radius: 20px;
+    height: 32px;
+    line-height: 32px;
+    margin-left: 20px;
+}
+
+#ResumeEditor .delete2 {
+    cursor: pointer;
+    text-align: center;
+    background: #b78080;
+    padding: 3px 6px 4px 6px;
+    border-radius: 50%;
+}
+
+#ResumeEditor .font1 {
+    font-size: 16px;
+    color: #606266;
+}
