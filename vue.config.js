@@ -8,7 +8,7 @@
 // 用于github pages
 module.exports = {
   lintOnSave: true,
-  outputDir: process.env.NETLIFY === 'true' ? './dist' : './editor',
+  outputDir: './dist',
   publicPath: process.env.NETLIFY === 'true'
     ? '/'
     : process.env.NODE_ENV === 'production'
